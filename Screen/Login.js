@@ -11,8 +11,6 @@ import {
   ImageBackground
 } from "react-native";
 
-import Home from "./Home";
-
 const Login = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,7 +46,7 @@ const Login = ({navigation}) => {
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() =>navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() =>navigation.navigate('ClientTabs')}>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
 
@@ -72,7 +70,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    flex: 1,
+    flex: 2,
     justifyContent: "center"
   },
 
@@ -92,7 +90,6 @@ const styles = StyleSheet.create({
     marginTop:10,
     backgroundColor: "#C1C1C1",
     alignItems:'center',
-    justifyContent: "center",
     opacity:0.7,
     position:'relative',
     overflow:'hidden'
@@ -102,8 +99,7 @@ const styles = StyleSheet.create({
   textlogo: {
     height:'40%',
     width: '40%',
-    justifyContent:'center',
-    marginTop:10,
+    justifyContent:'flex-start',
   },
 
   inputView: {
@@ -117,8 +113,13 @@ const styles = StyleSheet.create({
  
   TextInput: {
     height: 50,
-    flex: 1,
-    textDecorationColor:"#999999"
+    textDecorationColor:"#999999",
+    fontWeight:'bold'
+  },
+
+  loginText:{
+    fontWeight:'bold',
+    fontSize: 20
   },
  
   loginBtn: {
@@ -129,11 +130,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
     backgroundColor: "#ff3300",
+
   },
 
   forgot_button: {
     height: 30,
-    marginTop: 30,
+    marginTop: 10,
   },
 });
 

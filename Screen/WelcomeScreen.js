@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     },
 
     colors:{
-        color:"#ff8c52",
+        color:"black",
     },
 
     slide1: {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "orange",
+        backgroundColor: "peru",
       },
 
       Text:{
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "grey",
+        backgroundColor: "lightgrey",
       },
 
 });
