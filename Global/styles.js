@@ -1,6 +1,6 @@
 
 export const colors = {
-    buttons:"peru",
+    buttons:"#9F703A",
     grey1: '#43484d',
     grey2: '#5e6977',
     grey3: '#86939e',
@@ -15,7 +15,7 @@ export const colors = {
 
 
 export const parameters ={
-    headerHeight :40,
+    headerHeight :60,
 
     styledButton:{
         backgroundColor:"#ff8c52",

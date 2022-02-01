@@ -8,7 +8,7 @@ const WelcomeScreen =({navigation}) =>
 
     return(
 
-    <ScrollView contentContainerStyle = {{flexGrow: 1,justifyContent: 'space-between'}}>
+    <ScrollView contentContainerStyle = {styles.contentContainer}>
     
 
         <View style ={styles.headBox}>    
@@ -79,6 +79,12 @@ const WelcomeScreen =({navigation}) =>
 
 const styles = StyleSheet.create({
 
+    contentContainer:{
+      flexGrow: 1,
+      justifyContent: 'space-between',
+      backgroundColor:'beige'
+    },
+
     headBox:{
         justifyContent:'flex-start',
         alignItems:'center',
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "peru",
+        backgroundColor: "#9F703A",
       },
 
       Text:{
@@ -136,7 +142,7 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "lightgrey",
+        backgroundColor: "#926C44",
       },
 
 });

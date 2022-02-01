@@ -1,8 +1,6 @@
 import React from 'react'
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-
-import {colors} from '../Global/styles'
 import {Icon} from 'react-native-elements'
 
 import Search from '../Screen/Search'

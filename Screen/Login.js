@@ -8,7 +8,8 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ImageBackground
+  ImageBackground,
+  StatusBar
 } from "react-native";
 
 const Login = ({navigation}) => {
@@ -17,6 +18,10 @@ const Login = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+                translucent
+                barStyle='light-content'
+             />
       <ImageBackground source={require('./bglogin.jpg')} resizeMode="cover" style={styles.image} blurRadius={1}>
 
       <Image source={require('./logo1.png')} style={styles.logo} />
@@ -46,7 +51,7 @@ const Login = ({navigation}) => {
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() =>navigation.navigate('ClientTabs')}>
+        <TouchableOpacity onPress={() =>navigation.navigate('DrawerNavigator')}>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
 
@@ -113,6 +118,7 @@ const styles = StyleSheet.create({
  
   TextInput: {
     height: 50,
+    width:300,
     textDecorationColor:"#999999",
     fontWeight:'bold'
   },
@@ -129,7 +135,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    backgroundColor: "#ff3300",
+    backgroundColor: "#e5b73b",
 
   },
 

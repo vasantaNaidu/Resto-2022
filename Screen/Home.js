@@ -11,11 +11,16 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 
 export const Home = ({navigation}) => {
 
-  const [Locate, setLocate] = useState(true)
   const [indexCheck, setIndexCheck] = useState("0")
 
   return(
     <View style ={styles.container}>
+
+              <StatusBar
+                translucent
+                barStyle='dark-content'
+                backgroundColor="#926C44"
+             />
 
     <HomeHeader navigation ={navigation}/>
     
@@ -28,10 +33,10 @@ export const Home = ({navigation}) => {
              <View style ={{marginTop:10, marginBottom:10, flexDirection:'row',justifyContent:'space-evenly'}}>
                 <TouchableOpacity
                         onPress ={()=>{
-                            setLocate(true)
+                            navigation.navigate("RestaurantsMapScreen")
                         }}
                     >
-                    <View style ={{...styles.LocateButton,backgroundColor:Locate?colors.buttons :colors.grey5}}>
+                    <View style ={{...styles.LocateButton,backgroundColor:colors.grey5}}>
                         <Text style ={styles.LocateText}>Locate Nearby</Text>
                     </View>
                 </TouchableOpacity>

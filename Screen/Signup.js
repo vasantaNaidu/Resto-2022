@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { AppRegistry,Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Pressable,} from "react-native";
+import { AppRegistry,Text, SafeAreaView, StyleSheet,
+   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar} from "react-native";
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
 
 const Signup=(navigation)=> {
@@ -11,6 +12,14 @@ const Signup=(navigation)=> {
      
     return ( 
         <SafeAreaView style={styles.container}>
+
+              <StatusBar
+                translucent
+                barStyle='dark-content'
+                backgroundColor="#926C44"
+             />          
+          <ImageBackground source={require('./bglogin.jpg')} resizeMode="cover" style={styles.image} blurRadius={1}></ImageBackground>
+          <Image source={require('./textlogo.png')} style={styles.textlogo} />
             <Text style={styles.headtext}>CREAT YOUR ACCOUNT!</Text>
             <Text style={styles.detail}>START YOUR HUNGRY {'\n'}JOURNEY TODAY.</Text>
             <TextInput
@@ -51,7 +60,7 @@ const Signup=(navigation)=> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#e5b73b',
+        backgroundColor: 'peru',
         alignItems: "center",
         justifyContent: "center",
         
@@ -111,6 +120,18 @@ const styles = StyleSheet.create({
         margin:10,
       
       },
+      image:{
+        flex:1,
+        justifyContent:'center'
+    },
+
+    textlogo: {
+      height:'20%',
+      width: '50%',
+      alignSelf:'center',
+      marginTop:5
+    },
+
      
 });
 

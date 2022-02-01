@@ -3,7 +3,7 @@ import React from 'react';
 
 const Myaccount = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Account</Text>
     </View>
   );
@@ -11,4 +11,10 @@ const Myaccount = () => {
 
 export default Myaccount;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center",
+  },
+});
