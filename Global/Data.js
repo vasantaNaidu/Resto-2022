@@ -11,16 +11,17 @@ export const filterData = [{name:"Fast food",image: require('../assets/fastfood.
 
 
 export const filterData2 = [{name:"Fast food",image:require('../assets/fastfood.png') , id:"0"},
-{name:"Burgers",image: require("../assets/dosa.png"),id:"1"},
-{name:"Salads",image:require("../assets/panipuri.png"),id:"2"},
-{name:"Hotdog",image: require("../assets/pavbhaji.png"),id:"3"},
-{name:"Chinese",image:"https://bukasapics.s3.us-east-2.amazonaws.com/pizza6.png",id:"4"},
-{name:"Mexican",image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate1.png",id:"5"},  
-{name:"Sea food",image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate2.png",id:"6"},
-{name:"Chinese Food",image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png",id:"7"},
-{name:"Mexican pie",image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png",id:"8"},  
-{name:"Ocean dish",image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png",id:"9"},
-];
+                    {name:"Dosa",image:require("../assets/dosa.png"),id:"6"},
+                    {name:"Pani Puri",image:require("../assets/panipuri.png"),id:"2"},
+                    {name:"Puri",image:require("../assets/puri.png"),id:"3"},
+                    {name:"Pav Bhaji",image:require("../assets/pavbhaji.png"),id:"4"},
+                    {name:"Idli",image:require("../assets/idli.png"),id:"5"},
+                    {name:"Vada Pav",image:require("../assets/vadapav.png"),id:"1"},
+{name:"Burgers",image: require("../assets/dosa.png"),id:"7"},
+{name:"Salads",image:require("../assets/panipuri.png"),id:"8"},
+{name:"Hotdog",image: require("../assets/pavbhaji.png"),id:"9"},
+{name:"Hotdog",image: require("../assets/pavbhaji.png"),id:"10"},
+              ];
 
 
 

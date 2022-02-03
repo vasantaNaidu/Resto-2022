@@ -29,7 +29,7 @@ const DrawerContent = (props)=> {
     return(
         <View style ={styles.container}>
                  <DrawerContentScrollView {...props}>
-                 <View style ={{backgroundColor:colors.buttons,}}>
+                 <View style ={{backgroundColor:colors.buttons,marginTop:10,marginBottom:20,height:160}}>
                 <View style = {{flexDirection:'row', alignItems:'center',
                                     paddingLeft:20,paddingVertical:10}}>
                     <Avatar 
