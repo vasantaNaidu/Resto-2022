@@ -121,7 +121,7 @@ export default function SearchComponent (){
                        onPress = {() =>{
 
                             Keyboard.dismiss
-                            navigation.navigate("SearchResultScreen",{item:item.name})
+                            navigation.navigate("SearchResult",{item:item.name})
                             setModalVisible(false)
                             setTextInputFossued(true)
                                 }} >

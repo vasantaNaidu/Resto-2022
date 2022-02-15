@@ -23,7 +23,7 @@ export default function SearchScreen({navigation}){
                     renderItem = {({item,index})=>(
                         <TouchableWithoutFeedback
                                  onPress ={()=>{
-                                    navigation.navigate("SearchResultScreen",{item:item.name})
+                                    navigation.navigate("SearchResult",{item:item.name})
                                 }}
                                 >
                             <View style = {styles.imageView}>

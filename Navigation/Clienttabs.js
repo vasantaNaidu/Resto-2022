@@ -3,7 +3,7 @@ import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {Icon} from 'react-native-elements'
 
-import Search from '../Screen/Search'
+import { Clientstack } from './Clientstack'
 import Myaccount from '../Screen/Myaccount'
 import { Home } from '../Screen/Home'
 
@@ -35,7 +35,7 @@ const ClientTabs=()=>{
 
             <RootClientTabs.Screen 
                 name ="Search"
-                component ={Search}
+                component ={Clientstack}
                 options ={
                     {
                         tabBarLabel : "Search",
