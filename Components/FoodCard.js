@@ -15,7 +15,7 @@ export default function FoodCard({
     businessAddress ,
     farAway ,
     averageReview ,
-    images,
+    image,
     screenWidth
 }){
 
@@ -24,7 +24,7 @@ export default function FoodCard({
             <View style ={{...styles.cardView,width:screenWidth}}>
                 <Image 
                     style ={{...styles.image, width:screenWidth}}
-                    // source = {{uri:images}}
+                    source = {{uri:image}}
                 />
 
 <View>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
             borderTopLeftRadius:5,
             borderTopRightRadius:5,
             height:150,
+            resizeMode:'cover'
          },
 
          restaurantName:{

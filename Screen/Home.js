@@ -127,7 +127,7 @@ export const Home = ({navigation}) => {
               <View style ={{marginRight:5}}>
                   <FoodCard 
                       screenWidth  ={SCREEN_WIDTH*0.8}
-                      images ={item.images}
+                      images = {item.image}
                       restaurantName ={item.restaurantName}
                       farAway ={item.farAway}
                       businessAddress ={item.businessAddress}
@@ -151,7 +151,7 @@ export const Home = ({navigation}) => {
                 <View key ={item.id} style = {{paddingBottom:20}}>
                 <FoodCard 
                            screenWidth  ={SCREEN_WIDTH*0.95}
-                           images ={item.images}
+                           images ={item.image}
                            restaurantName ={item.restaurantName}
                            farAway ={item.farAway}
                            businessAddress ={item.businessAddress}
