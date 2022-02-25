@@ -10,6 +10,6 @@ server.use(bodyParser());
 
 server.use('/user', UserRouter)
 
-server.listen(port,() => {
-    console.log('Server Running on port');  
+server.listen(port, () => {
+    console.log('Server Running on port ${port}');
 })
