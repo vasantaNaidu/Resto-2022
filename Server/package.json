@@ -4,6 +4,7 @@
   "description": "backend for server",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "tests": "nodemon app.js"
   },
   "author": "",
