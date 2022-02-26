@@ -27,15 +27,15 @@ export default function SearchScreen({navigation}){
                                 }}
                                 >
                             <View style = {styles.imageView}>
-                              <ImageBackground
+                              {/* <ImageBackground
                                     style ={styles.image}
-                                    source = {item.images}
-                                >
+                                    source = {{uri:item.image}}
+                                > */}
                                     
                                 <View style ={styles.textView}>
                                     <Text style ={{color:colors.cardbackground}}>{item.name}</Text>
                                 </View>
-                                </ImageBackground>  
+                                {/* </ImageBackground>   */}
                             </View>
                         </TouchableWithoutFeedback>
                     )}
