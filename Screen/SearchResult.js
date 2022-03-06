@@ -18,7 +18,7 @@ const SearchResult = ({navigation,route}) => {
 
                         <SearchResultCard
                             screenWidth = {SCREEN_WIDTH}
-                            images = {item.image}
+                            // images = {item.images}
                             averageReview ={item.averageReview}
                             numberOfReview ={item.numberOfReview}
                             restaurantName ={item.restaurantName}
