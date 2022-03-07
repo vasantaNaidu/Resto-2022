@@ -11,10 +11,39 @@ import {
   ImageBackground,
   StatusBar
 } from "react-native";
+import firebase from 'firebase/app';
+import "firebase/auth";
 
 const Login = ({navigation}) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [values, SetValues] = useState({
+    email : "",
+    password : ""
+  })
+
+  function handleChange(text, eventName) {
+    SetValues(prev => {
+        return {
+            ...prev,
+            [eventName]: text
+        }
+    })
+}
+
+function Login() {
+
+  const { email, password } = values
+
+  firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+      })
+      .catch((error) => {
+          alert(error.message)
+          // ..
+      });
+}
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,9 +62,9 @@ const Login = ({navigation}) => {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            placeholder="Username"
+            placeholder="Email Address"
             placeholderTextColor="#003f5c"
-            onChangeText={(email) => setEmail(email)} />
+            onChangeText={text => handleChange(text, "email")} />
         </View>
 
         <View style={styles.inputView}>
@@ -44,12 +73,12 @@ const Login = ({navigation}) => {
             placeholder="Password"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)} />
+            onChangeText={text => handleChange(text, "password")} />
         </View>
 
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn} onClick={() => Login()}>
           <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>  
 
         <TouchableOpacity onPress={() =>navigation.navigate('DrawerNavigator')}>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
