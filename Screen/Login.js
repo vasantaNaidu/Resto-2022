@@ -11,39 +11,25 @@ import {
   ImageBackground,
   StatusBar
 } from "react-native";
-import firebase from 'firebase/app';
-import "firebase/auth";
+// import firebase from 'firebase/app';
+// import "firebase/auth";
+import { auth } from "../db/firebaseconfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({navigation}) => {
 
-  const [values, SetValues] = useState({
-    email : "",
-    password : ""
-  })
-
-  function handleChange(text, eventName) {
-    SetValues(prev => {
-        return {
-            ...prev,
-            [eventName]: text
-        }
-    })
-}
-
-function Login() {
-
-  const { email, password } = values
-
-  firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
+const handleLogIn = () => { 
+  signInWithEmailAndPassword(auth,email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log('Logged in with:', user.email);
       })
       .catch((error) => {
           alert(error.message)
-          // ..
       });
 }
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,21 +48,23 @@ function Login() {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
+            value={email}
             placeholder="Email Address"
             placeholderTextColor="#003f5c"
-            onChangeText={text => handleChange(text, "email")} />
+            onChangeText={text => setEmail(text)} />
         </View>
 
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
+            value={password}
             placeholder="Password"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
-            onChangeText={text => handleChange(text, "password")} />
+            onChangeText={text => setPassword(text)} />
         </View>
 
-        <TouchableOpacity style={styles.loginBtn} onClick={() => Login()}>
+        <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>  
 
