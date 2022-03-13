@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { AppRegistry,Text, SafeAreaView, StyleSheet,
    TextInput, TouchableOpacity, ImageBackground, Image, StatusBar} from "react-native";
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
+import { auth } from "../db/firebaseconfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { database } from "../db/firebaseconfig";
+import {ref, set } from "firebase/database";
 
 const Signup=(navigation)=> {
     const [Name, setName] = useState("");
@@ -9,7 +13,27 @@ const Signup=(navigation)=> {
     const [PhoneNo, setPhoneNo] = useState("");
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
-     
+
+    const handleSignUp = () => {
+        createUserWithEmailAndPassword(auth,Email, Password)
+        .then(userCredentials => {
+          const user = userCredentials.user;
+          // const UData = writeUserData();
+          console.log('Registered with:', user.email);
+        })
+        .catch(error => alert(error.message))
+    }
+
+//     const writeUserData = (Name, DOB, PhoneNo, Email, Password) => {
+//       set(ref(database, 'users/'), {
+//         Username: Name,
+//         DateOfBirth:DOB,
+//         ContactNo:PhoneNo,
+//         EmailID: Email,
+//         Password: Password
+//   });
+// }
+
     return ( 
         <SafeAreaView style={styles.container}>
 
@@ -39,7 +63,6 @@ const Signup=(navigation)=> {
             <TextInput
                 placeholder="Email ID"
                 style={styles.inputView} 
-                secureTextEntry={true}
                 onChangeText={(Email) => setEmail(Email)}/>
             <TextInput
                 placeholder="Password"
@@ -49,7 +72,7 @@ const Signup=(navigation)=> {
             
             <Text style={styles.description}>*password must contain 1 capital, small, number and special character.</Text>
 
-            <TouchableOpacity style={styles.signBtn}>
+            <TouchableOpacity style={styles.signBtn} onPress={handleSignUp}>
                 <Text style={styles.signText}>REGISTER</Text>
             </TouchableOpacity>
 

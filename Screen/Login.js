@@ -11,8 +11,23 @@ import {
   ImageBackground,
   StatusBar
 } from "react-native";
+// import firebase from 'firebase/app';
+// import "firebase/auth";
+import { auth } from "../db/firebaseconfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({navigation}) => {
+
+const handleLogIn = () => { 
+  signInWithEmailAndPassword(auth,email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log('Logged in with:', user.email);
+      })
+      .catch((error) => {
+          alert(error.message)
+      });
+}
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,23 +48,25 @@ const Login = ({navigation}) => {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            placeholder="Username"
+            value={email}
+            placeholder="Email Address"
             placeholderTextColor="#003f5c"
-            onChangeText={(email) => setEmail(email)} />
+            onChangeText={text => setEmail(text)} />
         </View>
 
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
+            value={password}
             placeholder="Password"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)} />
+            onChangeText={text => setPassword(text)} />
         </View>
 
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
           <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>  
 
         <TouchableOpacity onPress={() =>navigation.navigate('DrawerNavigator')}>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
