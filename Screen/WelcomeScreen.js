@@ -2,9 +2,24 @@ import React,{useEffect,useContext} from 'react';
 import {AppRegistry,View, Text, StyleSheet,Image,ScrollView,TouchableOpacity} from 'react-native'
 import Swiper from 'react-native-swiper'
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
+import { auth } from "../db/firebaseconfig";
+import { SignInContext } from "../contexts/authContext"
+import { onAuthStateChanged } from 'firebase/auth';
 
 const WelcomeScreen =({navigation}) =>
 {
+
+  const {dispatchSignedIn} = useContext(SignInContext)
+  useEffect(()=>{
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        dispatchSignedIn({type:"UPDATE_SIGN_IN",payload:{userToken:"signed-in"}})
+      }else{
+        dispatchSignedIn({type:"UPDATE_SIGN_IN",payload:{userToken:null}})
+      }
+    })
+    
+  },[])
 
     return(
 

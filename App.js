@@ -1,12 +1,14 @@
 import React from 'react'
-
+import { SignInContextProvider } from './contexts/authContext';
 import Rootnavigator from './Navigation/Rootnavigator'
 
 
 const App =()=>
  {
   return (
-    <Rootnavigator/>
+    <SignInContextProvider>
+        <Rootnavigator/>
+    </SignInContextProvider>
   )
 };
 

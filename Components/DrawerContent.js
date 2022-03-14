@@ -1,10 +1,12 @@
 import React, {useState,useContext,useEffect} from 'react';
+import {auth} from "../db/firebaseconfig"
 
 import {
   View,
   Text,
   Switch,
   StyleSheet,
+  Alert
  
 } from 'react-native';
 
@@ -22,9 +24,23 @@ import {
      } from 'react-native-elements'
 
 import {colors} from '../Global/styles'
+import { SignInContext } from '../contexts/authContext'
 
 
 const DrawerContent = (props)=> {
+
+    const {dispatchSignedIn} = useContext(SignInContext)
+
+    const handlesignOut = () =>{
+        auth.signOut()
+            .then(
+                ()=>{console.log("USER SUCCESSFULLY SIGNED OUT")
+                dispatchSignedIn({type:"UPDATE_SIGN_IN",payload:{userToken:null}})
+            })
+            .catch((errot) => {
+                alert(error.message)
+            })
+    }
 
     return(
         <View style ={styles.container}>
@@ -154,10 +170,10 @@ const DrawerContent = (props)=> {
                             type ="material-community"
                             name = "logout-variant"
                             color ={color}
-                            size ={size}
-                            onPress ={()=>{signOut()}} 
+                            size ={size} 
                         />
                     )}
+                    onPress ={()=>{handlesignOut()}}
                 />
     </View>
     )

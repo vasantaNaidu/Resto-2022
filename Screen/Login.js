@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,22 +15,31 @@ import {
 // import "firebase/auth";
 import { auth } from "../db/firebaseconfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { SignInContext } from "../contexts/authContext"
 
 const Login = ({navigation}) => {
+
+  const [isSecureEntry,setisSecureEntry] = useState(true);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const {dispatchSignedIn} = useContext(SignInContext)
 
 const handleLogIn = () => { 
   signInWithEmailAndPassword(auth,email, password)
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log('Logged in with:', user.email);
+        if(user){
+          dispatchSignedIn({type:"UPDATE_SIGN_IN",payload:{userToken:"signed-in"}})
+      }
       })
       .catch((error) => {
           alert(error.message)
       });
 }
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -54,21 +63,30 @@ const handleLogIn = () => {
             onChangeText={text => setEmail(text)} />
         </View>
 
-        <View style={styles.inputView}>
+        <View style={styles.PasswordinputView}>
           <TextInput
-            style={styles.TextInput}
+            style={styles.passwordtext}
             value={password}
             placeholder="Password"
             placeholderTextColor="#003f5c"
-            secureTextEntry={true}
+            secureTextEntry={isSecureEntry}
             onChangeText={text => setPassword(text)} />
+
+            <TouchableOpacity 
+            onPress={()=>{setisSecureEntry((prev)=>!prev);}}
+            style={{paddingRight:20}}
+            >
+              <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+            </TouchableOpacity>
+          
+
         </View>
 
         <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>  
 
-        <TouchableOpacity onPress={() =>navigation.navigate('DrawerNavigator')}>
+        <TouchableOpacity onPress>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
 
@@ -132,12 +150,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin:10
   },
+
+  PasswordinputView : {
+    flexDirection:'row',
+    backgroundColor: "#ffffff",
+    borderRadius: 40,
+    width: "70%",
+    height: 50,
+    alignItems: "center",
+    margin:10
+  },
  
   TextInput: {
     height: 50,
     width:300,
     textDecorationColor:"#999999",
     fontWeight:'bold'
+  },
+
+  passwordtext : {
+    flex:1,
+    height: 50,
+    width:300,
+    textDecorationColor:"#999999",
+    fontWeight:'bold',
+    paddingLeft:25
   },
 
   loginText:{
