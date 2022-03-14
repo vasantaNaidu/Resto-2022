@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import Authnavigator from './Authnavigator'
+import AppStack from './AppStack';
+import { SignInContext } from '../contexts/authContext';
 
 const Rootnavigator =()=>
 {
+    const {signedIn} = useContext(SignInContext)
     return(
         <NavigationContainer>
-            <Authnavigator/>
+            {signedIn.userToken === null  ?  <Authnavigator />: <AppStack />}
         </NavigationContainer>
     )   
 };

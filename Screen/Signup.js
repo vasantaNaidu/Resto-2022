@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { AppRegistry,Text, SafeAreaView, StyleSheet,
-   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar} from "react-native";
+   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View} from "react-native";
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
 import { auth } from "../db/firebaseconfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { database } from "../db/firebaseconfig";
 import {ref, set } from "firebase/database";
 
+
 const Signup=(navigation)=> {
+
+    const [isSecureEntry,setisSecureEntry] = useState(true);
     const [Name, setName] = useState("");
     const [DOB, setDOB] = useState("");
     const [PhoneNo, setPhoneNo] = useState("");
@@ -20,6 +23,7 @@ const Signup=(navigation)=> {
           const user = userCredentials.user;
           // const UData = writeUserData();
           console.log('Registered with:', user.email);
+
         })
         .catch(error => alert(error.message))
     }
@@ -64,12 +68,21 @@ const Signup=(navigation)=> {
                 placeholder="Email ID"
                 style={styles.inputView} 
                 onChangeText={(Email) => setEmail(Email)}/>
-            <TextInput
+
+            <View style={{flexDirection:'row',alignContent:'center',paddingLeft:40}}>
+
+              <TextInput 
                 placeholder="Password"
-                style={styles.inputView} 
-                secureTextEntry={true}
+                style={styles.PasswordinputView} 
+                secureTextEntry={isSecureEntry}
                 onChangeText={(Password) => setPassword(Password)}/>
-            
+                <TouchableOpacity 
+                    onPress={()=>{setisSecureEntry((prev)=>!prev);}}
+                    style={{paddingRight:55,height:50}}>
+                    <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+                </TouchableOpacity>
+            </View>
+
             <Text style={styles.description}>*password must contain 1 capital, small, number and special character.</Text>
 
             <TouchableOpacity style={styles.signBtn} onPress={handleSignUp}>
@@ -112,6 +125,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         fontWeight:"bold",
         fontSize:20,
+      },
+
+      PasswordinputView : {
+        width: "80%",
+        height: 50,
+        marginBottom: 20,
+        alignItems: "center",
+        borderBottomColor: 'cornsilk', 
+        borderBottomWidth: 3,
+        fontWeight:"bold",
+        fontSize:20,
+        flex:1,
       },
 
       description: {
