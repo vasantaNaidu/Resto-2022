@@ -99,7 +99,7 @@ const DrawerContent = (props)=> {
                 />
 
 
-                <DrawerItem 
+                {/* <DrawerItem 
                     label = "Promotions"
                     icon = {({color,size})=>(
                         <Icon 
@@ -109,7 +109,7 @@ const DrawerContent = (props)=> {
                             size ={size}
                         />
                     )}
-                />
+                /> */}
 
 
 

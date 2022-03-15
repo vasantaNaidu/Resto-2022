@@ -53,7 +53,7 @@ const SearchResultCard = ({
                         iconStyle ={{marginTop:3,marginLeft:-3}}
                     />
 
-                    <Text style ={styles.view5}>{farAway}Min</Text>
+                    <Text style ={styles.view5}>{farAway} Min</Text>
                 </View>
                 <View style ={{flex:9}}>
                     <Text style ={styles.text6}>{businessAddress}</Text>
