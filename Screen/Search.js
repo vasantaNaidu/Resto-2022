@@ -59,29 +59,29 @@ export default function SearchScreen({navigation}){
 
 const Footer = ()=>{
     return(
-        <View style ={{marginTop:20,marginBottom:30 }}>
+        <View style ={{marginTop:20,marginBottom:300 }}>
 
-                <View style ={{}}>
+                <View>
                 <FlatList 
                     style ={{marginBottom:10}}
                     data = {filterData2}
                     keyExtractor ={item=>item.id}
                     renderItem = {({item,index})=>(
                         <TouchableWithoutFeedback
-                                onPress ={()=>{
-                                    navigation.navigate("SearchResultScreen",{item:item.name})
+                                 onPress ={()=>{
+                                    navigation.navigate("SearchResult",{item:item.name})
                                 }}
                                 >
                             <View style = {styles.imageView}>
-                              {/* <ImageBackground
+                              <ImageBackground
                                     style ={styles.image}
-                                    source = {{uri:item.image}}
-                                > */}
+                                    source = {item.images}
+                                >
                                     
                                 <View style ={styles.textView}>
                                     <Text style ={{color:colors.cardbackground}}>{item.name}</Text>
                                 </View>
-                                {/* </ImageBackground>   */}
+                                </ImageBackground>  
                             </View>
                         </TouchableWithoutFeedback>
                     )}

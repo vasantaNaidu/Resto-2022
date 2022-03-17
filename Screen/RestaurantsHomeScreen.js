@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, Dimensions, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, ScrollView, Image, FlatList } from 'react-native'
 import React from 'react'
 import {colors , fonts} from '../Global/styles'
-import {restaurantsData } from '../Global/Data'
+import {restaurantsData, menu } from '../Global/Data'
 import RestaurantHeader from '../Components/RestaurantHeader'
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity} from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
+import { Linking } from 'react-native'
+
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const initialLayout = SCREEN_WIDTH;
@@ -21,11 +24,11 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
       showsVerticalScrollIndicator = {true}>
         <View>
         <RestaurantHeader id ={id} navigation ={navigation} />
-                     {restaurantsData[id].discount &&
+                     {/* {restaurantsData[id].discount &&
                      <View style ={styles.view1}>
                         <Text style ={styles.text1}>GET {restaurantsData[id].discount}% OFF ON BOOKING</Text>
                      </View>
-                     }
+                     } */}
                      <View style ={styles.view2}>
                     <View style ={styles.view3}>
                         <Text style ={styles.text2}>{restaurantsData[id].restaurantName}</Text>
@@ -88,20 +91,43 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
           <View style={{flexDirection:'column', paddingLeft:20}}>
             <View style={{flexDirection:'row'}}>
               <Icon name ="clock" type ="material-community" color = {colors.grey3} size = {30} />
-              <Text>time</Text>
+              <Text style={styles.text9}>{restaurantsData[id].time}</Text>
+              <TouchableOpacity onPress={()=>{Linking.openURL('tel:{restaurantsData[id].tel}');}}>
+                <Icon name ="phone-in-talk" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:180}}/>
+              </TouchableOpacity> 
               </View>
             <View style={{flexDirection:'row'}}>
             <Icon name ="currency-inr" type ="material-community" color = {colors.grey3} size = {30} />
-            <Text>approx cost</Text>
+            <Text style={styles.text9}>{restaurantsData[id].approx}</Text>
             </View>
             <View style={{flexDirection:'row'}}>
             <Icon name ="food-fork-drink" type ="material-community" color = {colors.grey3} size = {30} />
-            <Text>foodType</Text>
+            <Text style={styles.text9}>{restaurantsData[id].foodType}</Text>
             </View>
             <View style={{flexDirection:'row'}}>
             <Icon name ="map-marker-outline" type ="material-community" color = {colors.grey3} size = {30} />
-            <Text>location</Text>
+            <Text style={styles.text9}>{restaurantsData[id].businessAddress}</Text>
+            <TouchableOpacity onPress={()=>{Linking.openURL('https://www.google.co.in/maps/place/R+City+Mall/@19.0999164,72.9093627,15z/data=!4m5!3m4!1s0x3be7c7cb91a08e4b:0x10408c61181384c3!8m2!3d19.0996843!4d72.9163939');}}>
+              <Icon name = "directions" type ="material-community" color = {colors.grey3} size = {33} iconStyle ={{marginLeft:95}}/>
+            </TouchableOpacity>
             </View>
+          </View>
+
+          <View style={styles.view6}>
+              <Text style={styles.text8}>Menu</Text>
+              <Text style={styles.text10}>POPULAR DISHES</Text>
+              <FlatList 
+              showsHorizontalScrollIndicator ={false}
+              horizontal ={true}
+              data={menu}
+              keyExtractor={(item)=>item.key}
+              renderItem={({item}) => {
+                return (<View style={styles.smallCard}>
+                  <Text>{item.title}</Text>
+                </View>
+                )}} />
+              <Text style={styles.text10}>FULL MENU</Text>
+              <Image source={{uri:'https://bit.ly/3CT8LDX'}} style={{height:100,width:200,margin:20,resizeMode:'cover'}} />
           </View>
         </View>
 
@@ -134,11 +160,13 @@ fontSize:20,
 fontWeight:"bold"
 },
 
-view2:{ flexDirection:"row",
+view2:{ 
+  flexDirection:"row",
   flex:1,
   marginBottom:5,
   marginHorizontal:10,
   justifyContent:"space-between",
+  marginTop:10
   },
 
 view3:{flex:8,
@@ -243,22 +271,36 @@ text7:{
       textAlign:'center'
     },
 
+    view6:{
+    flex:3,
+    marginTop : 20,
     
+    borderWidth:1,
+    width:"100%",
+    height:"50%",
+    alignSelf:'center'
+    },
 
+    text10:{
+      fontSize:16,
+      fontWeight:"bold",
+      color:colors.grey3,
+      marginLeft:20,
+      marginTop:10
+    },
 
-// view7:{width:40,
-//     height:40,
-//     alignItems:"center",
-//     borderRadius:20,
-//     justifyContent:"space-around",
-//     },
-
-
-
-// text8:{fontSize:13,
-//     color:colors.black,
-//     marginBottom:5
-//   },
+    smallCard :{
+      borderRadius:20,
+      backgroundColor:colors.grey5,
+      justifyContent:'space-evenly',
+      alignContent:'space-around',
+      alignItems:'center',
+      padding:5,
+      width:100,
+      margin:8,
+      height:30,
+      marginTop:10
+    },
 
 // view8:{flex:3,
 //     alignItems:"center"
