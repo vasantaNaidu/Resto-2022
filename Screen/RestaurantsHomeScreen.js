@@ -20,16 +20,17 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
   return (
     <View style={styles.container}>
       <ScrollView
-      
+      stickyHeaderIndices={[0]}
       showsVerticalScrollIndicator = {true}>
         <View>
         <RestaurantHeader id ={id} navigation ={navigation} />
+        </View>
                      {/* {restaurantsData[id].discount &&
                      <View style ={styles.view1}>
                         <Text style ={styles.text1}>GET {restaurantsData[id].discount}% OFF ON BOOKING</Text>
                      </View>
                      } */}
-                     <View style ={styles.view2}>
+                  <View style ={styles.view2}>
                     <View style ={styles.view3}>
                         <Text style ={styles.text2}>{restaurantsData[id].restaurantName}</Text>
                         <Text style ={styles.text3}>{restaurantsData[id].foodType}</Text>
@@ -43,13 +44,13 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
                     </View>
                     
                 </View>
-        <TouchableOpacity onPress={()=>{navigation.navigate("BookingPage")}}>
-          <View style = {styles.BookNow}>
-                    <Image source={require('./logo.png')} style = {styles.logo}/>
-                <Text style = {styles.text7}>Book a Table {'\n'}Get instant confirmation</Text>
-                <Icon name ="arrow-right-circle" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:40}}/>
-              </View>
-        </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{navigation.navigate("BookingPage")}}>
+                       <View style = {styles.BookNow}>
+                        <Image source={require('./logo.png')} style = {styles.logo}/>
+                        <Text style = {styles.text7}>Book a Table {'\n'}Get instant confirmation</Text>
+                        <Icon name ="arrow-right-circle" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:40}}/>
+                        </View>
+                      </TouchableOpacity>
         
         <View style = {styles.view5}>
             <Text style = {styles.text8}>About the restaurant</Text>
@@ -89,26 +90,26 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
             </Swiper>
           
           <View style={{flexDirection:'column', paddingLeft:20}}>
-            <View style={{flexDirection:'row'}}>
-              <Icon name ="clock" type ="material-community" color = {colors.grey3} size = {30} />
-              <Text style={styles.text9}>{restaurantsData[id].time}</Text>
-              <TouchableOpacity onPress={()=>{Linking.openURL('tel:{restaurantsData[id].tel}');}}>
-                <Icon name ="phone-in-talk" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:180}}/>
-              </TouchableOpacity> 
-              </View>
-            <View style={{flexDirection:'row'}}>
-            <Icon name ="currency-inr" type ="material-community" color = {colors.grey3} size = {30} />
+            <View style={{flexDirection:'row', margin:3}}>
+            <Icon name ="clock" type ="material-community" color = {colors.grey3} size = {25} />
+            <Text style={styles.text9}>{restaurantsData[id].time}</Text>
+            <Icon name ="phone-in-talk" type ="material-community" color = {colors.grey3} size = {25} iconStyle ={{marginLeft:190}}/>
+            <TouchableOpacity onPress={()=>{Linking.openURL('tel:{restaurantsData[id].tel}');}}>
+            </TouchableOpacity> 
+            </View>
+            <View style={{flexDirection:'row', margin:3}}>
+            <Icon name ="currency-inr" type ="material-community" color = {colors.grey3} size = {25} />
             <Text style={styles.text9}>{restaurantsData[id].approx}</Text>
             </View>
-            <View style={{flexDirection:'row'}}>
-            <Icon name ="food-fork-drink" type ="material-community" color = {colors.grey3} size = {30} />
-            <Text style={styles.text9}>{restaurantsData[id].foodType}</Text>
+            <View style={{flexDirection:'row', margin:3}}>
+            <Icon name ="food-fork-drink" type ="material-community" color = {colors.grey3} size = {25} />
+            <Text style={styles.text9}> {restaurantsData[id].foodType}</Text>
             </View>
-            <View style={{flexDirection:'row'}}>
-            <Icon name ="map-marker-outline" type ="material-community" color = {colors.grey3} size = {30} />
+            <View style={{flexDirection:'row', margin:3}}>
+            <Icon name ="map-marker-outline" type ="material-community" color = {colors.grey3} size = {25} />
             <Text style={styles.text9}>{restaurantsData[id].businessAddress}</Text>
             <TouchableOpacity onPress={()=>{Linking.openURL('https://www.google.co.in/maps/place/R+City+Mall/@19.0999164,72.9093627,15z/data=!4m5!3m4!1s0x3be7c7cb91a08e4b:0x10408c61181384c3!8m2!3d19.0996843!4d72.9163939');}}>
-              <Icon name = "directions" type ="material-community" color = {colors.grey3} size = {33} iconStyle ={{marginLeft:95}}/>
+              <Icon name = "directions" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:87}}/>
             </TouchableOpacity>
             </View>
           </View>
@@ -123,7 +124,7 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
               keyExtractor={(item)=>item.key}
               renderItem={({item}) => {
                 return (<View style={styles.smallCard}>
-                  <Text>{item.title}</Text>
+                  <Text style={styles.text11}>{item.title}</Text>
                 </View>
                 )}} />
               <Text style={styles.text10}>FULL MENU</Text>
@@ -132,7 +133,7 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
         </View>
 
 
-        </View>
+        {/* </View> */}
       </ScrollView>
       
     </View>
@@ -161,12 +162,11 @@ fontWeight:"bold"
 },
 
 view2:{ 
-  flexDirection:"row",
-  flex:1,
+  marginLeft:18,
   marginBottom:5,
   marginHorizontal:10,
   justifyContent:"space-between",
-  marginTop:10
+ 
   },
 
 view3:{flex:8,
@@ -265,7 +265,8 @@ text7:{
       backgroundColor: '#92BBD9'
     },
 
-    text9:{fontSize:16,
+    text9:{
+      fontSize:15,
       fontWeight:"bold",
       color:colors.grey3,
       textAlign:'center'
@@ -282,15 +283,15 @@ text7:{
     },
 
     text10:{
-      fontSize:16,
+      fontSize:14,
       fontWeight:"bold",
       color:colors.grey3,
       marginLeft:20,
-      marginTop:10
+      marginTop:5
     },
 
     smallCard :{
-      borderRadius:20,
+      borderRadius:10,
       backgroundColor:colors.grey5,
       justifyContent:'space-evenly',
       alignContent:'space-around',
@@ -301,6 +302,13 @@ text7:{
       height:30,
       marginTop:10
     },
+
+    text11:{
+      fontSize:12,
+      fontWeight:"bold",
+      color:'black'
+      },
+    
 
 // view8:{flex:3,
 //     alignItems:"center"
@@ -313,12 +321,6 @@ text7:{
 //   borderRadius:20,
 //   justifyContent:"space-around",
 // },
-
-// text10:{fontSize:16,
-//   fontWeight:"bold",
-//   color:colors.cardbackground,
-//   marginTop:5
-//   },
 
 // text11:{fontSize:13,
 //     color:colors.cardbackground,

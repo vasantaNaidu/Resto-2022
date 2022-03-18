@@ -1,12 +1,10 @@
 import React from 'react'
 
 import {View, Text, StyleSheet} from 'react-native';
-import {Icon, withBadge} from 'react-native-elements'
+import {Icon} from 'react-native-elements'
 import {colors,parameters} from '../Global/styles'
 
 export default function HomeHeader({navigation}){
-
- const BadgeIcon = withBadge(0)(Icon)
 
     return(
     <View style ={styles.header}>
@@ -28,11 +26,13 @@ export default function HomeHeader({navigation}){
         </View>
 
         <View style ={{alignItems:"center", justifyContent:"center", marginRight:15}}>
-            <BadgeIcon 
-                type ="material"
-                name ="calendar-today"
+            <Icon 
+                type ="material-community"
+                name ="calendar-check"
                 size = {32}
                 color ={colors.cardbackground}
+                onPress={()=>{navigation.navigate("Bookinghistory")}}
+
             />
         </View>
 

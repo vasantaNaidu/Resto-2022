@@ -14,7 +14,7 @@ export function Clientstack({navigation,route}) {
     useLayoutEffect(()=>{
 
         const routeName = getFocusedRouteNameFromRoute(route);
-        if(routeName === "RestaurantHomeScreen" || "MenuProductScreen"){
+        if(routeName === "RestaurantsHomeScreen"){
             navigation.setOptions({tabBarVisible:false})
         }else{
             navigation.setOptions({tabBarVisible:true})
@@ -52,14 +52,14 @@ export function Clientstack({navigation,route}) {
                 })
         }/>
 
-        <ClientSearch.Screen 
+        {/* <ClientSearch.Screen 
             name ="MenuProductScreen"
             component ={MenuProductScreen}
             options = {
                 ()=>({
                     headerShown:false
                 })
-        }/>
+        }/> */}
     </ClientSearch.Navigator>
   )
 }
