@@ -5,6 +5,7 @@ import DrawerNavigator from './DrawerNavigator'
 import BookingPage from '../Screen/BookingPage';
 import Bookinghistory from '../Screen/Bookinghistory'
 
+
 const App = createStackNavigator();
 
 const AppStack = () =>{
@@ -14,6 +15,7 @@ const AppStack = () =>{
             <App.Screen name='RestaurantsMapScreen' component={RestaurantsMapScreen} options={TransitionPresets.RevealFromBottomAndroid}/>
             <App.Screen name='BookingPage' component={BookingPage} options={TransitionPresets.RevealFromBottomAndroid}/>
             <App.Screen name='Bookinghistory' component={Bookinghistory} options={TransitionPresets.RevealFromBottomAndroid}/>
+           
         </App.Navigator>
     )
 };

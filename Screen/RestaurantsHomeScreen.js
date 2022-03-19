@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, ScrollView, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, ScrollView, Image, FlatList, Modal } from 'react-native'
 import React from 'react'
 import {colors , fonts} from '../Global/styles'
 import {restaurantsData, menu } from '../Global/Data'
@@ -10,19 +10,30 @@ import { Linking } from 'react-native'
 
 
 
+
 const SCREEN_WIDTH = Dimensions.get('window').width
 const initialLayout = SCREEN_WIDTH;
 
-const RestaurantsHomeScreen = ({navigation,route}) => {
+const RestaurantsHomeScreen = ({navigation,route,props}) => {
 
   const {id,restaurant} = route.params
+  // const showSlider = () => {
+  //   <View>
+  //     <Modal visible={true} transparent={true}>
+  //     <Text>Hello</Text>
+  //     {/* <ImageView images={restaurantsData[id].image}
+  //     /> */}
+  //   </Modal> 
+  //   </View>
+     
+  // };
 
   return (
     <View style={styles.container}>
       <ScrollView
       stickyHeaderIndices={[0]}
       showsVerticalScrollIndicator = {true}>
-        <View>
+        <View> 
         <RestaurantHeader id ={id} navigation ={navigation} />
         </View>
                      {/* {restaurantsData[id].discount &&
@@ -89,51 +100,58 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
 
             </Swiper>
           
-          <View style={{flexDirection:'column', paddingLeft:20}}>
-            <View style={{flexDirection:'row', margin:3}}>
-            <Icon name ="clock" type ="material-community" color = {colors.grey3} size = {25} />
-            <Text style={styles.text9}>{restaurantsData[id].time}</Text>
-            <Icon name ="phone-in-talk" type ="material-community" color = {colors.grey3} size = {25} iconStyle ={{marginLeft:190}}/>
-            <TouchableOpacity onPress={()=>{Linking.openURL('tel:{restaurantsData[id].tel}');}}>
-            </TouchableOpacity> 
-            </View>
-            <View style={{flexDirection:'row', margin:3}}>
-            <Icon name ="currency-inr" type ="material-community" color = {colors.grey3} size = {25} />
-            <Text style={styles.text9}>{restaurantsData[id].approx}</Text>
-            </View>
-            <View style={{flexDirection:'row', margin:3}}>
-            <Icon name ="food-fork-drink" type ="material-community" color = {colors.grey3} size = {25} />
-            <Text style={styles.text9}> {restaurantsData[id].foodType}</Text>
-            </View>
-            <View style={{flexDirection:'row', margin:3}}>
-            <Icon name ="map-marker-outline" type ="material-community" color = {colors.grey3} size = {25} />
-            <Text style={styles.text9}>{restaurantsData[id].businessAddress}</Text>
-            <TouchableOpacity onPress={()=>{Linking.openURL('https://www.google.co.in/maps/place/R+City+Mall/@19.0999164,72.9093627,15z/data=!4m5!3m4!1s0x3be7c7cb91a08e4b:0x10408c61181384c3!8m2!3d19.0996843!4d72.9163939');}}>
-              <Icon name = "directions" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:87}}/>
-            </TouchableOpacity>
+            <View style={{flexDirection:'column', paddingLeft:20}}>
+                <View style={{flexDirection:'row', margin:3}}>
+                    <Icon name ="clock" type ="material-community" color = {colors.grey3} size = {25} />
+                    <Text style={styles.text9}>{restaurantsData[id].time}</Text>
+                    <Icon name ="phone-in-talk" type ="material-community" color = {colors.grey3} size = {25} iconStyle ={{marginLeft:190}}/>
+                    <TouchableOpacity onPress={()=>{Linking.openURL('tel:{restaurantsData[id].tel}');}}/>
+                </View>
+
+                <View style={{flexDirection:'row', margin:3}}>
+                    <Icon name ="currency-inr" type ="material-community" color = {colors.grey3} size = {25} />
+                    <Text style={styles.text9}>{restaurantsData[id].approx}</Text>
+                </View>
+
+                <View style={{flexDirection:'row', margin:3}}>
+                    <Icon name ="food-fork-drink" type ="material-community" color = {colors.grey3} size = {25} />
+                    <Text style={styles.text9}> {restaurantsData[id].foodType}</Text>
+                </View>
+
+                <View style={{flexDirection:'row', margin:3}}>
+                    <Icon name ="map-marker-outline" type ="material-community" color = {colors.grey3} size = {25} />
+                    <Text style={styles.text9}>{restaurantsData[id].businessAddress}</Text>
+                    <TouchableOpacity onPress={()=>{Linking.openURL('https://www.google.co.in/maps/place/R+City+Mall/@19.0999164,72.9093627,15z/data=!4m5!3m4!1s0x3be7c7cb91a08e4b:0x10408c61181384c3!8m2!3d19.0996843!4d72.9163939');}}>
+                      <Icon name = "directions" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:87}}/>
+                    </TouchableOpacity>
+                </View>
+
             </View>
           </View>
-
-          <View style={styles.view6}>
+        
+          <View style={styles.view5}>
               <Text style={styles.text8}>Menu</Text>
               <Text style={styles.text10}>POPULAR DISHES</Text>
               <FlatList 
-              showsHorizontalScrollIndicator ={false}
-              horizontal ={true}
-              data={menu}
-              keyExtractor={(item)=>item.key}
-              renderItem={({item}) => {
-                return (<View style={styles.smallCard}>
-                  <Text style={styles.text11}>{item.title}</Text>
-                </View>
+                  showsHorizontalScrollIndicator ={false}
+                  horizontal ={true}
+                  data={menu}
+                  keyExtractor={(item)=>item.key}
+                  renderItem={({item}) => {
+                    return (<View style={styles.smallCard}>
+                      <Text style={styles.text11}>{item.title}</Text>
+                    </View>
                 )}} />
               <Text style={styles.text10}>FULL MENU</Text>
-              <Image source={{uri:'https://bit.ly/3CT8LDX'}} style={{height:100,width:200,margin:20,resizeMode:'cover'}} />
+                  <Image 
+                  source={{uri:'https://bit.ly/3CT8LDX'}} 
+                  style={{height:100,width:200,margin:20,resizeMode:'cover'}} /> 
           </View>
-        </View>
 
+          <View style={styles.view5}>
+                  <Text style={styles.text8}>Review</Text>
+          </View>
 
-        {/* </View> */}
       </ScrollView>
       
     </View>
@@ -228,11 +246,10 @@ text7:{
   view5:{ 
     flex:3,
     marginTop : 20,
-    
     borderWidth:1,
     width:"100%",
     height:"50%",
-    alignSelf:'center'
+    alignSelf:'center',
   },
   
   logo : {
@@ -272,15 +289,14 @@ text7:{
       textAlign:'center'
     },
 
-    view6:{
-    flex:3,
-    marginTop : 20,
-    
-    borderWidth:1,
-    width:"100%",
-    height:"50%",
-    alignSelf:'center'
-    },
+    // view6:{
+    // flex:3,
+    // marginTop : 20,
+    // borderWidth:1,
+    // width:"100%",
+    // height:"50%",
+    // alignSelf:'center'
+    // },
 
     text10:{
       fontSize:14,
@@ -292,7 +308,7 @@ text7:{
 
     smallCard :{
       borderRadius:10,
-      backgroundColor:colors.grey5,
+      backgroundColor:'#dcdcdc',
       justifyContent:'space-evenly',
       alignContent:'space-around',
       alignItems:'center',

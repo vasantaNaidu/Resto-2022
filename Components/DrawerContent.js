@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     },
 
     avatar:{
-        borderWidth:4,
+        
         borderColor:colors.pagebackground,
         resizeMode:'cover',
         

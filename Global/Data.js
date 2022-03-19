@@ -10,17 +10,13 @@ export const filterData = [{name:"Fast food",image: require('../assets/fastfood.
 
 
 
-export const filterData2 = [{name:"Fast food",images:{uri:'https://bit.ly/3s1hUXt'} , id:"0"},
-                    {name:"Dosa",images:{ uri:'https://bit.ly/3s1hUXt'},id:"6"},
-                    {name:"Pani Puri",images:{uri:'https://bit.ly/3s1hUXt'},id:"2"},
-                    {name:"Puri",images:{uri:'https://bit.ly/3s1hUXt'},id:"3"},
-                    {name:"Pav Bhaji",images:{uri:'https://bit.ly/3s1hUXt'},id:"4"},
-                    {name:"Idli",images:{uri:'https://bit.ly/3s1hUXt'},id:"5"},
-                    {name:"Vada Pav",images:{uri:'https://bit.ly/3s1hUXt'},id:"1"},
-{name:"Burgers",images: {uri:'https://bit.ly/3s1hUXt'},id:"7"},
-{name:"Salads",images:{uri:'https://bit.ly/3s1hUXt'},id:"8"},
-{name:"Hotdog",images: {uri:'https://bit.ly/3s1hUXt'},id:"9"},
-{name:"Hotdog",images: {uri:'https://bit.ly/3s1hUXt'},id:"10"},
+export const filterData2 = [{name:"FINE DINING",images:{uri:'https://bit.ly/3Js1sph'} , id:"0"},
+                    {name:"CASUAL DINING",images:{ uri:'https://bit.ly/3wlgMka'},id:"6"},
+                    {name:"FAST CASUAL",images:{uri:'https://bit.ly/3Js9LBz'},id:"2"},
+                    {name:"FAMILY STYLE",images:{uri:'https://bit.ly/3tn8CWe'},id:"3"},
+                    {name:"CAFE",images:{uri:'https://bit.ly/3JrwEFc'},id:"4"},
+                    {name:"BUFFET STYLE",images:{uri:'https://bit.ly/369vu2I'},id:"5"},
+                    
               ];
 
 

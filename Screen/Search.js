@@ -13,7 +13,7 @@ export default function SearchScreen({navigation}){
         <View style ={{flex:1,marginBottom:10,paddingTop:10}}>
            
                 <SearchComponent />
-            <View style ={{marginTop:150}}>
+            <View style ={{marginTop:130, marginBottom:310}}>
 
                 <View>
                 <FlatList 
@@ -30,10 +30,11 @@ export default function SearchScreen({navigation}){
                               <ImageBackground
                                     style ={styles.image}
                                     source = {item.images}
+                                    blurRadius ={3}
                                 >
                                     
                                 <View style ={styles.textView}>
-                                    <Text style ={{color:colors.cardbackground}}>{item.name}</Text>
+                                    <Text style ={{color:colors.cardbackground,fontWeight:'bold',fontSize:20}}>{item.name}</Text>
                                 </View>
                                 </ImageBackground>  
                             </View>
@@ -44,7 +45,7 @@ export default function SearchScreen({navigation}){
                     showsverticalScrollIndicator = {false}
                     numColumns ={2}
                     ListHeaderComponent = { <Text style = {styles.listHeader}>Top Categories</Text>}
-                    ListFooterComponent = {<Footer />}
+                    // ListFooterComponent = {<Footer />}
                 />
                 </View>
 
@@ -57,48 +58,48 @@ export default function SearchScreen({navigation}){
 
 
 
-const Footer = ()=>{
-    return(
-        <View style ={{marginTop:20,marginBottom:300 }}>
+// const Footer = ()=>{
+//     return(
+//         <View style ={{marginTop:20,marginBottom:300 }}>
 
-                <View>
-                <FlatList 
-                    style ={{marginBottom:10}}
-                    data = {filterData2}
-                    keyExtractor ={item=>item.id}
-                    renderItem = {({item,index})=>(
-                        <TouchableWithoutFeedback
-                                 onPress ={()=>{
-                                    navigation.navigate("SearchResult",{item:item.name})
-                                }}
-                                >
-                            <View style = {styles.imageView}>
-                              <ImageBackground
-                                    style ={styles.image}
-                                    source = {item.images}
-                                >
+//                 <View>
+//                 <FlatList 
+//                     style ={{marginBottom:10}}
+//                     data = {filterData2}
+//                     keyExtractor ={item=>item.id}
+//                     renderItem = {({item,index})=>(
+//                         <TouchableWithoutFeedback
+//                                  onPress ={()=>{
+//                                     navigation.navigate("SearchResult",{item:item.name})
+//                                 }}
+//                                 >
+//                             <View style = {styles.imageView}>
+//                               <ImageBackground
+//                                     style ={styles.image}
+//                                     source = {item.images}
+//                                 >
                                     
-                                <View style ={styles.textView}>
-                                    <Text style ={{color:colors.cardbackground}}>{item.name}</Text>
-                                </View>
-                                </ImageBackground>  
-                            </View>
-                        </TouchableWithoutFeedback>
-                    )}
+//                                 <View style ={styles.textView}>
+//                                     <Text style ={{color:colors.cardbackground}}>{item.name}</Text>
+//                                 </View>
+//                                 </ImageBackground>  
+//                             </View>
+//                         </TouchableWithoutFeedback>
+//                     )}
 
-                    horizontal ={false}
-                    showsverticalScrollIndicator = {false}
-                    numColumns ={2}
-                    ListHeaderComponent = { <Text style = {styles.listHeader}>More categories</Text>}
+//                     horizontal ={false}
+//                     showsverticalScrollIndicator = {false}
+//                     numColumns ={2}
+//                     ListHeaderComponent = { <Text style = {styles.listHeader}>More categories</Text>}
                   
-                />
-                </View>
+//                 />
+//                 </View>
 
 
-            </View>
+//             </View>
 
-    )
-}
+//     )
+// }
 
 
 
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
                         width:SCREEN_WIDTH*0.4475,
                         alignItems:"center",
                         justifyContent:"center",
-                        backgroundColor:'rgba(52, 52, 52,0.3)'
+                        backgroundColor:'rgba(52, 52, 52,0.3)',
                      },
 
 
