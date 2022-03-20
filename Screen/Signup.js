@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { AppRegistry,Text, SafeAreaView, StyleSheet,
-   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View} from "react-native";
+   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View, Platform} from "react-native";
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
 import { auth } from "../db/firebaseconfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { database } from "../db/firebaseconfig";
 import {ref, set } from "firebase/database";
+import { Icon } from "react-native-elements";
+import { colors } from "../Global/styles";
+import DatePicker from 'react-native-datepicker';
+
 
 
 const Signup=(navigation)=> {
@@ -27,6 +31,25 @@ const Signup=(navigation)=> {
         })
         .catch(error => alert(error.message))
     }
+
+    // const [date,setDate] = useState(new Date());
+    // const [mode,setMode] = useState('DOB');
+    // const [show,setShow] = useState(false);
+
+    // const onChange = (event,selectedDate) => {
+    //   const currentDate = selectedDate || date;
+    //   setShow(Platform.OS === 'android');
+    //   setDate(currentDate);
+
+    // }
+
+    // const showMode = (currentMode) => {
+    //   setShow(true);
+    //   setMode(currentMode);
+    // }
+
+    const [date, setDate] = useState(new Date());
+
 
 //     const writeUserData = (Name, DOB, PhoneNo, Email, Password) => {
 //       set(ref(database, 'users/'), {
@@ -54,11 +77,39 @@ const Signup=(navigation)=> {
                 placeholder="Name" 
                 style={styles.inputView} 
                 onChangeText={(Name) => setName(Name)}/>
-            <TextInput
-                placeholder="Date Of Birth" 
-                style={styles.inputView} 
-                autoComplete=""
-                onChangeText={(DOB) => setDOB(DOB)}/>
+
+                <View style={styles.inputView1}>
+                <DatePicker
+                  
+                  date={date} // Initial date from state
+                  mode="date" // The enum of date, datetime and time
+                  format="DD-MM-YYYY"
+                  minDate="01-01-1960"
+                  maxDate={date}
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  customStyles={{
+                    dateIcon: {
+                      display: 'none',
+                      
+                    },
+                    dateInput: {
+                      borderWidth:0,
+                      marginStart:1
+                    },
+                    dateText: {
+                      fontWeight:"bold",
+                      fontSize:20,
+                      color:"#79443B",
+                      
+                    },
+                  }}
+                  onDateChange={(date) => {
+                    setDate(date);
+                  }}
+                  />
+                  <Text style={{fontSize:20,alignSelf:'center', marginLeft:35, color:'white', fontWeight:'bold'}}> - Date of Birth</Text>
+                </View>
             <TextInput
                 placeholder="Mobile number"
                 style={styles.inputView} 
@@ -127,6 +178,27 @@ const styles = StyleSheet.create({
         fontSize:20,
       },
 
+      inputView1: {
+        width: "80%",
+        height: 50,
+        marginBottom: 20,
+        alignItems: "center",
+        borderBottomColor: 'cornsilk', 
+        borderBottomWidth: 3,
+        fontWeight:"bold",
+        fontSize:20,
+        flexDirection:'row'
+      },
+
+      inputView2: {
+        width: "80%",
+        height: 50,
+        alignItems: "center",
+        fontWeight:"bold",
+        fontSize:20,
+        flexDirection:'row'
+      },
+
       PasswordinputView : {
         width: "80%",
         height: 50,
@@ -136,7 +208,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         fontWeight:"bold",
         fontSize:20,
-        flex:1,
+        flexDirection:'row',
       },
 
       description: {

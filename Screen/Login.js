@@ -14,7 +14,7 @@ import {
 // import firebase from 'firebase/app';
 // import "firebase/auth";
 import { auth } from "../db/firebaseconfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { SignInContext } from "../contexts/authContext"
 
 const Login = ({navigation}) => {
@@ -39,6 +39,8 @@ const handleLogIn = () => {
           alert(error.message)
       });
 }
+
+
   
   return (
     <SafeAreaView style={styles.container}>
@@ -86,7 +88,7 @@ const handleLogIn = () => {
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>  
 
-        <TouchableOpacity onPress>
+        <TouchableOpacity onPress = {()=>navigation.navigate('forgotpass')}>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
 

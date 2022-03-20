@@ -14,7 +14,7 @@ import { Linking } from 'react-native'
 const SCREEN_WIDTH = Dimensions.get('window').width
 const initialLayout = SCREEN_WIDTH;
 
-const RestaurantsHomeScreen = ({navigation,route,props}) => {
+const RestaurantsHomeScreen = ({navigation,route}) => {
 
   const {id,restaurant} = route.params
   // const showSlider = () => {
