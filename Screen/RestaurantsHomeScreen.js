@@ -34,7 +34,7 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
       stickyHeaderIndices={[0]}
       showsVerticalScrollIndicator = {true}>
         <View> 
-        <RestaurantHeader id ={id} navigation ={navigation} />
+        <RestaurantHeader navigation ={navigation} />
         </View>
                      {/* {restaurantsData[id].discount &&
                      <View style ={styles.view1}>

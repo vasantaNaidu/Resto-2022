@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import {Icon} from 'react-native-elements'
 import { colors } from '../Global/styles'
 import {restaurantsData} from '../Global/Data'
+import DatePicker from 'react-native-datepicker';
+
 
 const BookingPage = ({navigation,id}) => {
 
   // const {id,restaurant} = route.params
+  const [date, setDate] = useState(new Date());
 
   return (
     <View style={styles.container}>
@@ -22,13 +25,38 @@ const BookingPage = ({navigation,id}) => {
         <Text style={styles.text1}>Restaurnat's Name</Text>
         <Text style={styles.text2}>Restaurnat's address</Text>
         <Text style={styles.text1}>Select Data And Time</Text>
-        <View >
-          <Icon 
-          name ="arrow-left"
-          type = "material-community"
-          color = {colors.black}
-          size = {25}
-          />
+        
+        <View style ={{justifyContent:'center', alignContent:'center'}}>
+
+                  <DatePicker
+                  
+                  date={date} // Initial date from state
+                  mode="date" // The enum of date, datetime and time
+                  format="DD-MM-YYYY"
+                  minDate="01-01-1960"
+                  maxDate={date}
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  customStyles={{
+                    dateIcon: {
+                      // display: 'none',
+                      
+                    },
+                    dateInput: {
+                      borderWidth:0,
+                      marginStart:1
+                    },
+                    dateText: {
+                      fontWeight:"bold",
+                      fontSize:20,
+                      color:"#79443B",
+                      
+                    },
+                  }}
+                  onDateChange={(date) => {
+                    setDate(date);
+                  }}
+                  />
         </View>
     </View>
   )
