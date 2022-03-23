@@ -2,64 +2,40 @@ import React, { useState } from "react";
 import { AppRegistry,Text, SafeAreaView, StyleSheet,
    TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View, Platform} from "react-native";
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
-import { auth } from "../db/firebaseconfig";
+import { auth, db} from "../db/firebaseconfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { database } from "../db/firebaseconfig";
-import {ref, set } from "firebase/database";
-import { Icon } from "react-native-elements";
-import { colors } from "../Global/styles";
 import DatePicker from 'react-native-datepicker';
-
+import { doc, setDoc, Timestamp } from "firebase/firestore"; 
 
 
 const Signup=(navigation)=> {
 
     const [isSecureEntry,setisSecureEntry] = useState(true);
     const [Name, setName] = useState("");
-    const [DOB, setDOB] = useState("");
     const [PhoneNo, setPhoneNo] = useState("");
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
+    const [date, setDate] = useState();
 
-    const handleSignUp = () => {
+    const userData = {
+        dateandtime : Timestamp.fromDate(new Date()),
+        userName : setName,
+        userDOB : setDate,
+        userPhone : setPhoneNo,
+        userEmail : setEmail,
+        userPass : setPassword
+    };
+
+    const handleSignUp  =()=> {
         createUserWithEmailAndPassword(auth,Email, Password)
-        .then(userCredentials => {
-          const user = userCredentials.user;
-          // const UData = writeUserData();
-          console.log('Registered with:', user.email);
-
+        .then((userCredentials) = async() => {
+            // const user = userCredentials.user;
+            const re = await setDoc(doc(db, "users", "one"), userData);
+            // console.log('Registered with:', user.email)
+            console.log('Data is sent:',re)
         })
         .catch(error => alert(error.message))
     }
-
-    // const [date,setDate] = useState(new Date());
-    // const [mode,setMode] = useState('DOB');
-    // const [show,setShow] = useState(false);
-
-    // const onChange = (event,selectedDate) => {
-    //   const currentDate = selectedDate || date;
-    //   setShow(Platform.OS === 'android');
-    //   setDate(currentDate);
-
-    // }
-
-    // const showMode = (currentMode) => {
-    //   setShow(true);
-    //   setMode(currentMode);
-    // }
-
-    const [date, setDate] = useState(new Date());
-
-
-//     const writeUserData = (Name, DOB, PhoneNo, Email, Password) => {
-//       set(ref(database, 'users/'), {
-//         Username: Name,
-//         DateOfBirth:DOB,
-//         ContactNo:PhoneNo,
-//         EmailID: Email,
-//         Password: Password
-//   });
-// }
 
     return ( 
         <SafeAreaView style={styles.container}>
