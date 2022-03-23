@@ -10,7 +10,7 @@ const forgotpass = ({navigation}) => {
     
     const [email, setEmail] = useState("");
 
-    const forgotPassword = (email) => {
+    const forgotPassword = () => {
         sendPasswordResetEmail(auth,email)
         .then(() => {
           alert("reset email sent to " + email);
