@@ -46,7 +46,7 @@ export const Home = ({navigation}) => {
         </View>
 
         
-    <View style ={styles.filterView}>
+    {/* <View style ={styles.filterView}>
         <View style={styles.addressView}>
             <View style ={{flexDirection:"row",alignItems:"center",paddingLeft:10}}>
                 <Icon 
@@ -80,7 +80,7 @@ export const Home = ({navigation}) => {
                     size = {26}
                 />
         </View>
-        </View>
+        </View> */}
 
         <View style ={styles.headerTextView}>
             <Text style ={styles.headerText}>Browse Mumbai by Food</Text>
@@ -94,7 +94,10 @@ export const Home = ({navigation}) => {
                 extraData = {indexCheck}
                 renderItem = {({item,index})=>(
                     <Pressable
-                            onPress ={()=>{setIndexCheck(item.id)}}
+                            onPress ={()=>{
+                              setIndexCheck(item.id)
+                              navigation.navigate("SearchResult",{id:item,rName:item.restaurantName})
+                            }}
                         >
                         <View style ={indexCheck === item.id ? {...styles.smallCardSelected}:{...styles.smallCard}}>
                             <Image 
@@ -125,6 +128,7 @@ export const Home = ({navigation}) => {
           showsHorizontalScrollIndicator = {false}
           renderItem = {({item})=>(
               <View style ={{marginRight:5}}>
+                <TouchableOpacity>
                   <FoodCard 
                       screenWidth  ={SCREEN_WIDTH*0.8}
                       images = {item.image}
@@ -133,10 +137,13 @@ export const Home = ({navigation}) => {
                       businessAddress ={item.businessAddress}
                       averageReview ={item.averageReview}
                       numberOfReview ={item.numberOfReview}
-                      
+                      addresslink = {item.addresslink}
+                      onpressFoodCard = {()=>{navigation.navigate("RestaurantsHomeScreen",{id:item,rName:item.restaurantName})}}
                   />
+                  </TouchableOpacity>
               </View>
-            )}  
+            )}
+            
           />
   
         </View>
@@ -157,6 +164,7 @@ export const Home = ({navigation}) => {
                            businessAddress ={item.businessAddress}
                            averageReview ={item.averageReview}
                            numberOfReview ={item.numberOfReview}
+                           addresslink={item.addresslink}
                            
                        />
                 </View>

@@ -22,9 +22,8 @@ const SearchResult = ({navigation,route}) => {
                             averageReview ={item.averageReview}
                             numberOfReview ={item.numberOfReview}
                             restaurantName ={item.restaurantName}
-                            farAway ={item.farAway}
+                            addresslink={item.addresslink}
                             businessAddress ={item.businessAddress}
-                            // productData ={item.productData}
                             OnPressRestaurantCard ={()=>{navigation.navigate("RestaurantHomeScreen",{id:index,restaurant:item.restaurantName})}}
                         />
                                     

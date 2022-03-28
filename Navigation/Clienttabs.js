@@ -57,7 +57,7 @@ const ClientTabs=()=>{
                 component ={Myaccount}
                 options ={
                     {
-                        tabBarLabel : "Search",
+                        tabBarLabel : "Me",
                         tabBarIcon: ({color,size})=>(
                             <Icon 
                                 name ='person'

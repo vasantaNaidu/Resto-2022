@@ -1,17 +1,49 @@
 import { StyleSheet, Text, View, ImageBackground,Animated } from 'react-native'
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import { colors } from '../Global/styles'
 import {Icon} from 'react-native-elements'
 import {restaurantsData} from '../Global/Data'
 
 const RestaurantHeader = ({navigation,id}) => {
+    const index2 = 10
+    const currentValue = new Animated.Value(1)
+
+    const [liked,setLiked] = useState(false)
+    const [counter, setCounter] = useState(-2)
+    const[visible,setVisible] = useState(false)
+
+    const likeHander =()=>{
+        if(liked == false)
+                setVisible(false)
+
+        setLiked(!liked)
+        setCounter(index2)
+    }
+
+    // useEffect(()=>{
+    //     if(liked == true){
+    //         Animated.spring(currentValue,{
+    //             toValue:3,
+    //             friction:2,
+    //             useNativeDriver:true
+    //         }).start(()=>{
+    //             Animated.spring(currentValue,{
+    //                 toValue:1,
+    //                 useNativeDriver:true,
+    //                 friction:2
+    //             }).start(()=>{
+    //                 setVisible(false)
+    //             })
+    //         })
+    //     }
+    // },[liked])
   return (
     <View style={styles.container}>
-        <ImageBackground
+        {/* <ImageBackground
                 style = {styles.container}
                 source ={{uri:restaurantsData[id].image}}
                 
-                >
+                > */}
 
                 <View style ={styles.view1}>
                     <View style ={styles.view2}>
@@ -23,7 +55,7 @@ const RestaurantHeader = ({navigation,id}) => {
                             onPress ={()=>navigation.goBack()}
                         />
                     </View>
-                    {/* <View style ={styles.view3}>
+                    <View style ={styles.view3}>
                         <Icon 
                                 name ={liked && (index2 == counter) ? "favorite" : "favorite-border"}
                                 type = "material"
@@ -31,18 +63,18 @@ const RestaurantHeader = ({navigation,id}) => {
                                 size = {30}
                                 onPress ={likeHander}
                             />
-                    </View> */}
+                    </View>
 
                 </View>
-                {/* <View style ={styles.view4}>
+                <View style ={styles.view4}>
                     {visible && (index2 == counter) &&
                         <Animated.View style = {{transform:[{scale:currentValue}]}}>
                             <Icon name = "favorite" size = {40} color = "red" type ="material" />
                         </Animated.View>
                     }
 
-                </View> */}
-            </ImageBackground>
+                </View>
+            {/* </ImageBackground> */}
       
     </View>
   )
@@ -52,7 +84,8 @@ export default RestaurantHeader
 
 const styles = StyleSheet.create({
     
-container:{height:190,
+container:{height:60,
+    
     },
 
 ImageBackground:{
@@ -69,20 +102,17 @@ view1: {flexDirection:"row",
 view2:{margin:10,
        width:40,
        height:40,
-       backgroundColor:colors.cardbackground,
        alignItems:"center",
        justifyContent:"center",
-       borderRadius:20,
+       
       },
 
 view3:{marginTop:0,
        margin:10,
        width:40,
        height:40,
-       backgroundColor:colors.cardbackground,
        alignItems:"center",
        justifyContent:"center",
-       borderRadius:20,
        },
        
 view4:{ marginTop:0,

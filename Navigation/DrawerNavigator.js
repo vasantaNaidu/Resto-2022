@@ -5,6 +5,7 @@ import {Icon} from 'react-native-elements';
 import {colors} from "../Global/styles";
 import BusinessConsoleScreen from '../Screen/BusinessConsoleScreen';
 import DrawerContent from '../Components/DrawerContent';
+import Settings from '../Screen/Settings';
 
 const Drawer = createDrawerNavigator()
 
@@ -18,7 +19,7 @@ const DrawerNavigator = ()=>{
                 component ={ClientTabs}
 
                 options = {{
-                    title:'Client',
+                    title:'Home',
                     drawerIcon: ({focussed,size}) =>(
                         <Icon 
                             type = "material-community"
@@ -48,6 +49,25 @@ const DrawerNavigator = ()=>{
                     )
                 }}
             />
+
+            <Drawer.Screen 
+                name = "Settings"
+                component ={Settings}
+
+                options = {{
+                    title:'Settings',
+                    drawerIcon: ({focussed,size}) =>(
+                        <Icon 
+                            type = "material-community"
+                            name = "cog-outline"
+                            color = {focussed ? '#7cc' :colors.grey2}
+                            size = {size}
+
+                        />
+                    )
+                }}
+            />
+            
 
         </Drawer.Navigator>
     )}

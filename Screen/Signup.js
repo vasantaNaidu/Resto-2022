@@ -1,42 +1,63 @@
 import React, { useState } from "react";
 import { AppRegistry,Text, SafeAreaView, StyleSheet,
-   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View} from "react-native";
+   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View,} from "react-native";
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
-import { auth } from "../db/firebaseconfig";
+import { auth, db} from "../db/firebaseconfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { database } from "../db/firebaseconfig";
-import {ref, set } from "firebase/database";
+import { doc, setDoc ,collection } from "@firebase/firestore";
 
+
+const ref = doc(collection(db,"users"));
+const hey=() => [];
 
 const Signup=(navigation)=> {
 
     const [isSecureEntry,setisSecureEntry] = useState(true);
     const [Name, setName] = useState("");
-    const [DOB, setDOB] = useState("");
     const [PhoneNo, setPhoneNo] = useState("");
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
 
-    const handleSignUp = () => {
-        createUserWithEmailAndPassword(auth,Email, Password)
-        .then(userCredentials => {
-          const user = userCredentials.user;
-          // const UData = writeUserData();
-          console.log('Registered with:', user.email);
+  //   const phoneNumberFormat = (num) => {
+  //     let newNum = num.replace(/[-]+/g, '');
+  //     let x;
+  //     if (newNum.length <= 3) {
+  //         x = newNum;
+  //     } else if (newNum.length > 3 && newNum.length <= 6) {
+  //         x = newNum.slice(0, 3) + "-" + newNum.slice(3, 6)
+  //     } else {
+  //         x = newNum.slice(0, 3) + "-" + newNum.slice(3, 6) + "-" + newNum.slice(6, 10)
+  //     }
+  //     return x;
+  // };
+  // const validatePhone = [required("Phone number is required"), phoneNumberFormat];
 
+    const handleSignUp = (newdata)=> {
+      if(!Name|!PhoneNo|!Email|!Password){
+        alert("ERROR!!!Enter all Fields Details")
+      }
+      else if(PhoneNo.length!=10){
+        alert("ERROR!!!Invalid Mobile Number")
+      }
+      else {
+        createUserWithEmailAndPassword(auth,Email, Password)
+        .then((userCredentials) => {
+            const user = userCredentials.user;
+            // console.log(user)
+              
+              // .doc(newdata.id)
+              setDoc(ref,newdata)
+              .then(() => {
+                hey((prev)=>[newdata, ...prev]);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+            
         })
         .catch(error => alert(error.message))
     }
-
-//     const writeUserData = (Name, DOB, PhoneNo, Email, Password) => {
-//       set(ref(database, 'users/'), {
-//         Username: Name,
-//         DateOfBirth:DOB,
-//         ContactNo:PhoneNo,
-//         EmailID: Email,
-//         Password: Password
-//   });
-// }
+  }
 
     return ( 
         <SafeAreaView style={styles.container}>
@@ -55,22 +76,17 @@ const Signup=(navigation)=> {
                 style={styles.inputView} 
                 onChangeText={(Name) => setName(Name)}/>
             <TextInput
-                placeholder="Date Of Birth" 
-                style={styles.inputView} 
-                autoComplete=""
-                onChangeText={(DOB) => setDOB(DOB)}/>
-            <TextInput
                 placeholder="Mobile number"
                 style={styles.inputView} 
                 keyboardType="numeric"
+                maxLength={10}
+                // validate={validatePhone}
                 onChangeText={(PhoneNo) => setPhoneNo(PhoneNo)}/>
             <TextInput
                 placeholder="Email ID"
                 style={styles.inputView} 
                 onChangeText={(Email) => setEmail(Email)}/>
-
             <View style={{flexDirection:'row',alignContent:'center',paddingLeft:40}}>
-
               <TextInput 
                 placeholder="Password"
                 style={styles.PasswordinputView} 
@@ -78,14 +94,14 @@ const Signup=(navigation)=> {
                 onChangeText={(Password) => setPassword(Password)}/>
                 <TouchableOpacity 
                     onPress={()=>{setisSecureEntry((prev)=>!prev);}}
-                    style={{paddingRight:55,height:50}}>
+                    style={{paddingRight:50,height:50}}>
                     <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
                 </TouchableOpacity>
             </View>
 
             <Text style={styles.description}>*password must contain 1 capital, small, number and special character.</Text>
 
-            <TouchableOpacity style={styles.signBtn} onPress={handleSignUp}>
+            <TouchableOpacity style={styles.signBtn} onPress={()=>handleSignUp({Name,PhoneNo,Email,Password})}>
                 <Text style={styles.signText}>REGISTER</Text>
             </TouchableOpacity>
 
@@ -127,6 +143,27 @@ const styles = StyleSheet.create({
         fontSize:20,
       },
 
+      inputView1: {
+        width: "80%",
+        height: 50,
+        marginBottom: 20,
+        alignItems: "center",
+        borderBottomColor: 'cornsilk', 
+        borderBottomWidth: 3,
+        fontWeight:"bold",
+        fontSize:20,
+        flexDirection:'row'
+      },
+
+      inputView2: {
+        width: "80%",
+        height: 50,
+        alignItems: "center",
+        fontWeight:"bold",
+        fontSize:20,
+        flexDirection:'row'
+      },
+
       PasswordinputView : {
         width: "80%",
         height: 50,
@@ -136,7 +173,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         fontWeight:"bold",
         fontSize:20,
-        flex:1,
+        flexDirection:'row',
       },
 
       description: {

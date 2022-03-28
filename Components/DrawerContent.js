@@ -23,8 +23,13 @@ import {
     Icon
      } from 'react-native-elements'
 
-import {colors} from '../Global/styles'
+import {colors, title} from '../Global/styles'
 import { SignInContext } from '../contexts/authContext'
+import Communications from 'react-native-communications'
+
+import email from 'react-native-email'
+
+
 
 
 const DrawerContent = (props)=> {
@@ -32,14 +37,55 @@ const DrawerContent = (props)=> {
     const {dispatchSignedIn} = useContext(SignInContext)
 
     const handlesignOut = () =>{
-        auth.signOut()
-            .then(
-                ()=>{console.log("USER SUCCESSFULLY SIGNED OUT")
-                dispatchSignedIn({type:"UPDATE_SIGN_IN",payload:{userToken:null}})
-            })
-            .catch((errot) => {
-                alert(error.message)
-            })
+        Alert.alert(
+            "Confirm",
+            "Are you sure?",
+            [
+                {
+                    text:"Yes",
+                    onPress: () => {
+                        auth.signOut()
+                        .then(
+                            ()=>{console.log("USER SUCCESSFULLY SIGNED OUT")
+                            dispatchSignedIn({type:"UPDATE_SIGN_OUT",payload:{userToken:null}})
+                        })
+                        .catch((errot) => {
+                            alert(error.message)
+                        })}
+                },
+                {
+                    text:"No", 
+                    onPress : () => console.log("no Pressed")
+                }
+            ]
+        )
+        
+    }
+
+    // const ratebox = () => {
+    //     Alert.alert(
+    //         "Rate us",
+    //         "My Alert Msg",
+    //         [
+    //           {
+    //             text: "Cancel",
+    //             onPress: () => console.log("Cancel Pressed"),
+    //             style: "cancel"
+    //           },
+    //           { text: "OK", onPress: () => console.log("OK Pressed") }
+    //         ]
+    //       )
+    // }
+
+    const sendfeedback = () => {
+        const to = 'stackofash@gmail.com' // string or array of email addresses
+        email(to, {
+            // Optional additional arguments
+            // cc: ['bazzy@moo.com', 'doooo@daaa.com'], // string or array of email addresses
+            // bcc: 'mee@mee.com', // string or array of email addresses
+            subject: 'Feedback',
+            body: ''
+        }).catch(console.error)
     }
 
     return(
@@ -72,12 +118,12 @@ const DrawerContent = (props)=> {
                         </View>
                     </View>
 
-                    <View style ={{flexDirection:'row', marginTop:0}}>
+                    {/* <View style ={{flexDirection:'row', marginTop:0}}>
                          <View style = {{marginLeft:10,alignItems:"center", justifyContent:"center" }}  >
                             <Text  style ={{fontWeight:'bold',color:colors.cardbackground,fontSize:18 }}>0</Text>
                             <Text style ={{color:colors.cardbackground,fontSize:14}} >My Cart</Text>
                         </View>    
-                    </View>
+                    </View> */}
 
                 </View>
             </View>
@@ -86,20 +132,7 @@ const DrawerContent = (props)=> {
                 
                 <DrawerItemList {...props} />
 
-                <DrawerItem 
-                    label = "Payment"
-                    icon = {({color,size})=>(
-                        <Icon 
-                            type ="material-community"
-                            name = "credit-card-outline"
-                            color ={color}
-                            size ={size}
-                        />
-                    )}
-                />
-
-
-                <DrawerItem 
+                {/* <DrawerItem 
                     label = "Promotions"
                     icon = {({color,size})=>(
                         <Icon 
@@ -109,11 +142,11 @@ const DrawerContent = (props)=> {
                             size ={size}
                         />
                     )}
-                />
+                /> */}
 
 
 
-            <DrawerItem 
+            {/* <DrawerItem 
                     label = "Settings"
                     icon = {({color,size})=>(
                         <Icon 
@@ -123,27 +156,41 @@ const DrawerContent = (props)=> {
                             size ={size}
                         />
                     )}
-                />
+                /> */}
 
 
 
-        <DrawerItem 
-                    label = "Help"
+            <DrawerItem 
+                    label = "Send Feedback"
                     icon = {({color,size})=>(
                         <Icon 
                             type ="material-community"
-                            name = "lifebuoy"
+                            name = "email-edit-outline"
                             color ={color}
                             size ={size}
                         />
                     )}
+                    onPress = {sendfeedback}
                 />
 
+        {/* <DrawerItem 
+                    label = "Rate us!"
+                    icon = {({color,size})=>(
+                        <Icon 
+                            type ="material-community"
+                            name = "star-outline"
+                            color ={color}
+                            size ={size}
+                        />
+                    )}
+                    onPress = {()=>{ratebox()}}
+                /> */}
 
 
 
 
-       <View style ={{borderTopWidth:1, borderTopColor:colors.grey5}}>
+
+       {/* <View style ={{borderTopWidth:1, borderTopColor:colors.grey5}}>
             <Text style ={styles.preferences}>Preferences</Text>
 
             <View style ={styles.switchText}>
@@ -156,12 +203,12 @@ const DrawerContent = (props)=> {
                 </View>
             </View>
 
-       </View>         
+       </View>          */}
 
 
 
      
-                </DrawerContentScrollView>  
+                 
 
                 <DrawerItem 
                     label = "Sign Out"
@@ -175,6 +222,8 @@ const DrawerContent = (props)=> {
                     )}
                     onPress ={()=>{handlesignOut()}}
                 />
+
+</DrawerContentScrollView>
     </View>
     )
 
@@ -186,7 +235,7 @@ const styles = StyleSheet.create({
     },
 
     avatar:{
-        borderWidth:4,
+        
         borderColor:colors.pagebackground,
         resizeMode:'cover',
         
