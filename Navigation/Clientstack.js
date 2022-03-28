@@ -5,6 +5,7 @@ import SearchScreen from '../Screen/Search';
 import SearchResult from '../Screen/SearchResult';
 import RestaurantsHomeScreen from '../Screen/RestaurantsHomeScreen';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import BookingPage from '../Screen/BookingPage';
 
 
 const ClientSearch = createStackNavigator()
@@ -14,7 +15,7 @@ export function Clientstack({navigation,route}) {
     useLayoutEffect(()=>{
 
         const routeName = getFocusedRouteNameFromRoute(route);
-        if(routeName === "RestaurantsHomeScreen"){
+        if(routeName === "RestaurantsHomeScreen" && "BookingPage"){
             navigation.setOptions({tabBarVisible:false})
         }else{
             navigation.setOptions({tabBarVisible:true})
@@ -46,6 +47,15 @@ export function Clientstack({navigation,route}) {
         <ClientSearch.Screen 
             name ="RestaurantHomeScreen"
             component ={RestaurantsHomeScreen}
+            options = {
+                ()=>({
+                    headerShown:false
+                })
+        }/>
+
+        <ClientSearch.Screen 
+            name ="BookingPage"
+            component ={BookingPage}
             options = {
                 ()=>({
                     headerShown:false

@@ -1,28 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, FlatList, Presable } from 'react-native'
 import React, {useState} from 'react'
 import {Button, Icon} from 'react-native-elements'
 import { colors } from '../Global/styles'
-import {restaurantsData} from '../Global/Data'
-import DatePicker from 'react-native-datepicker'
+import {days, restaurantsData, Schedule} from '../Global/Data'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 
+const BookingPage = ({navigation,route}) => {
 
-const BookingPage = ({navigation,id}) => {
+  const {id,rName,raddress} = route.params
+  const [indexCheckDay, setIndexCheckDay] = useState("0")
+  const [indexCheckTime, setIndexCheckTime] = useState("0")
+  const [Counter,setCounter] = useState(1);
 
-  // const {id,restaurant} = route.params
-  const [date, setDate] = useState(new Date());
-  const [displaymode, setMode] = useState('date');
-   const [isDisplayDate, setShow] = useState(false);
-
- const showMode = (currentMode) => {
-  setShow(true);
-  setMode(currentMode);
-};
-
-const display = () => {
-  showMode('date')
-}
+  const incrementCounter = () => setCounter(Counter + 1);
+  let decrementCounter = () => setCounter(Counter - 1);
+  if(Counter<=1) {
+    decrementCounter = () => setCounter(1);
+  }
 
   return (
+    <View>
     <View style={styles.container}>
       <View style ={styles.view2}>
                         <Icon 
@@ -33,25 +30,68 @@ const display = () => {
                             onPress ={()=>navigation.goBack()}
                         />
         </View>
-        <Text style={styles.text1}>Restaurnat's Name</Text>
-        <Text style={styles.text2}>Restaurnat's address</Text>
-        <Text style={styles.text1}>Select Data And Time</Text>
-        
-        <View style ={{justifyContent:'center', alignItems:'center'}}>
-          <Button onPress={display} title="Show date picker!"/>
-          {isDisplayDate && (
-                  <DatePicker
-                     testID="dateTimePicker"
-                     value={date}
-                     mode={displaymode}
-                     is24Hour={true}
-                     display="default"
-                     onChange={setDate}
-            />
-         )}
         </View>
+      <ScrollView 
+      showsVerticalScrollIndicator = {true} >
+        <Text style={styles.text1}>{restaurantsData[id].restaurantName}</Text>
+        <Text style={styles.text2}>{restaurantsData[id].located}</Text>
         
-    </View>
+        <Text style={styles.text1}>Select Data And Time</Text>
+        <Text style={styles.text1}>What Day?</Text>
+       <View style={{margin:5,marginLeft:5}}>
+          <FlatList 
+                  showsHorizontalScrollIndicator ={false}
+                  horizontal ={true}
+                  data={days}
+                  keyExtractor={(item)=>item.key}
+                  extraData = {indexCheckDay}
+                  renderItem={({item}) => {
+                    return (
+                    <TouchableOpacity onPress={()=>{setIndexCheckDay(item.key)}}>
+                      <View style= {indexCheckDay === item.key ? {...styles.CardSelected}:{...styles.Card}}>
+                      <Text style={styles.text3}>{item.title}</Text>
+                    </View>
+                     </TouchableOpacity>
+                )}} />
+
+        </View>
+        <Text style={styles.text1}>What Time?</Text>
+        <View style={{margin:5,marginLeft:5}}>
+        <FlatList 
+                  showsHorizontalScrollIndicator ={false}
+                  horizontal ={true}
+                  data={Schedule}
+                  keyExtractor={(item)=>item.key}
+                  extraData={indexCheckTime}
+                  renderItem={({item}) => {
+                    return (
+                      <TouchableOpacity onPress={()=>{setIndexCheckTime(item.key)}}>
+                      <View style= {indexCheckTime === item.key ? {...styles.CardSelected}:{...styles.Card}}>
+                      <Text style={styles.text3}>{item.title}</Text>
+                    </View>
+                    </TouchableOpacity>  
+                )}} />
+        </View>
+        <Text style={styles.text1}>How many People?</Text>
+        <View style={{flexDirection:'row', justifyContent:'center',marginTop:5}}>
+               <Icon
+               name="minus"
+               type = "material-community"
+                            color = {colors.black}
+                            size = {35}
+                            onPress = {decrementCounter}
+               />
+               <Text style={styles.qtybox}>{Counter}</Text>
+               <Icon
+               name="plus"
+               type = "material-community"
+                            color = {colors.black}
+                            size = {35}
+                            onPress = {incrementCounter}
+               />       
+        </View>
+        </ScrollView>
+        </View>
   )
 }
 
@@ -67,11 +107,10 @@ const styles = StyleSheet.create({
     height:40,
     alignItems:"center",
     justifyContent:"center",
-    
    },
    text1:{
-    margin:15,
-    marginLeft:30,
+    margin:10,
+    marginLeft:15,
     fontSize:20,
     fontWeight:"bold"
    },
@@ -81,4 +120,40 @@ const styles = StyleSheet.create({
     fontSize:15,
     fontWeight:"200"
    },
+   Card:{
+    borderRadius:10,
+    backgroundColor:'#dcdcdc',
+    justifyContent:'space-evenly',
+    alignContent:'space-around',
+    alignItems:'center',
+    width:130,
+    margin:8,
+    height:50,
+   },
+   CardSelected:{
+    borderRadius:10,
+    backgroundColor:colors.buttons,
+    justifyContent:"space-evenly",
+    alignContent:'space-around',
+    alignItems:'center',
+    width:130,
+    margin:8,
+    height:50
+  },
+   text3:{
+    fontSize:15,
+    fontWeight:"bold",
+    color:'black'
+    },
+    qtybox: { 
+      borderTopWidth: 2, 
+      borderBottomWidth: 2, 
+      borderColor: '#cccccc', 
+      color: 'black', 
+      fontSize: 20,
+      width:50,
+      height:40,
+      paddingLeft:14,
+      paddingTop:5
+    },
 })

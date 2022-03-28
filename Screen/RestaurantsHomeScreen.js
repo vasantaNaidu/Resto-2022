@@ -62,7 +62,7 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
                     </View>
                     
                 </View>
-                    <TouchableOpacity onPress={()=>{navigation.navigate("BookingPage")}}>
+                    <TouchableOpacity onPress={()=>{navigation.navigate("BookingPage",{id:restaurantsData[id].id,rName:restaurantsData[id].restaurantName,raddress:restaurantsData[id].businessAddress})}}>
                        <View style = {styles.BookNow}>
                         <Image source={require('./logo.png')} style = {styles.logo}/>
                         <Text style = {styles.text7}>Book a Table {'\n'}Get instant confirmation</Text>

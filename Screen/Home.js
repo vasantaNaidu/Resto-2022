@@ -96,7 +96,7 @@ export const Home = ({navigation}) => {
                     <Pressable
                             onPress ={()=>{
                               setIndexCheck(item.id)
-                              navigation.navigate("SearchResult")
+                              navigation.navigate("SearchResult",{id:item,rName:item.restaurantName})
                             }}
                         >
                         <View style ={indexCheck === item.id ? {...styles.smallCardSelected}:{...styles.smallCard}}>
@@ -128,7 +128,7 @@ export const Home = ({navigation}) => {
           showsHorizontalScrollIndicator = {false}
           renderItem = {({item})=>(
               <View style ={{marginRight:5}}>
-                <TouchableOpacity onPress={()=>{navigation.navigate("RestaurantsHomeScreen")}}>
+                <TouchableOpacity>
                   <FoodCard 
                       screenWidth  ={SCREEN_WIDTH*0.8}
                       images = {item.image}
@@ -138,7 +138,7 @@ export const Home = ({navigation}) => {
                       averageReview ={item.averageReview}
                       numberOfReview ={item.numberOfReview}
                       addresslink = {item.addresslink}
-                      
+                      onpressFoodCard = {()=>{navigation.navigate("RestaurantsHomeScreen",{id:item,rName:item.restaurantName})}}
                   />
                   </TouchableOpacity>
               </View>
