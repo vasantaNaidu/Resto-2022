@@ -1,15 +1,13 @@
-import { StyleSheet, Text, View, Dimensions, ScrollView, Image, FlatList, Modal } from 'react-native'
-import React from 'react'
-import {colors , fonts} from '../Global/styles'
-import {restaurantsData, menu } from '../Global/Data'
+import { StyleSheet, Text, View, Dimensions, ScrollView, Image, FlatList} from 'react-native'
+import React, {useCallback} from 'react'
+import {colors} from '../Global/styles'
+import {restaurantsData, menu, filterData2, reviewHighlights } from '../Global/Data'
 import RestaurantHeader from '../Components/RestaurantHeader'
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity} from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
 import { Linking } from 'react-native'
-
-
-
+import { phonecall } from 'react-native-communications'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const initialLayout = SCREEN_WIDTH;
@@ -17,16 +15,25 @@ const initialLayout = SCREEN_WIDTH;
 const RestaurantsHomeScreen = ({navigation,route}) => {
 
   const {id,restaurant} = route.params
-  // const showSlider = () => {
-  //   <View>
-  //     <Modal visible={true} transparent={true}>
-  //     <Text>Hello</Text>
-  //     {/* <ImageView images={restaurantsData[id].image}
-  //     /> */}
-  //   </Modal> 
-  //   </View>
-     
-  // };
+  const OpenURLButton = ({ url, children }) => {
+    const handlePress = useCallback(async () => {
+      // Checking if the link is supported for links with custom URL scheme.
+      const supported = await Linking.canOpenURL(url);
+  
+      if (supported) {
+        // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+        // by some browser in the mobile
+        await Linking.openURL(url);
+      } else {
+        Alert.alert(`Don't know how to open this URL: ${url}`);
+      }
+    }, [url]);
+
+    return (
+      <TouchableOpacity title= {children} onPress={handlePress}>
+          <Icon name ="map-marker-outline" type ="material-community" color = {colors.grey3} size = {25} />
+      </TouchableOpacity>
+    )};
 
   return (
     <View style={styles.container}>
@@ -49,8 +56,8 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
                             <Icon name ="star" type ="material-community" color = {colors.grey3} size = {15} />
                             <Text style ={styles.text4}>{restaurantsData[id].averageReview}</Text>
                             <Text style ={styles.text5}>{restaurantsData[id].numberOfReview}</Text>
-                            <Icon name ="map-marker" type ="material-community" color = {colors.grey3} size = {15} />
-                            <Text style ={styles.text6}>{restaurantsData[id].farAway} min away</Text> 
+                            {/* <Icon name ="map-marker" type ="material-community" color = {colors.grey3} size = {15} />
+                            <Text style ={styles.text6}>{restaurantsData[id].farAway} min away</Text>  */}
                         </View>
                     </View>
                     
@@ -66,35 +73,35 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
         <View style = {styles.view5}>
             <Text style = {styles.text8}>About the restaurant</Text>
 
-            <Text style={styles.text9}>{restaurantsData[id].rinfo}</Text>
+            <Text style={styles.text12}>{restaurantsData[id].rinfo}</Text>
 
             <Swiper autoplay ={true} style ={{height:300,marginTop:20}}>
               <View style ={styles.slide1}>
                 <Image 
-                        source ={{uri:"https://bit.ly/3I49dka"}}
-                        style ={{height:"100%", width:"100%",resizeMode:'cover'}}
+                        source ={filterData2[0].images}
+                        style ={{height:"100%", width:initialLayout,resizeMode:'cover'}}
                 />
               </View>  
 
               <View style ={styles.slide2}>
                 <Image 
-                        source ={{uri:"https://bit.ly/3qoVSwY"}}
-                        style ={{height:"100%", width:"100%"}}
+                        source ={filterData2[1].images}
+                        style ={{height:"100%", width:initialLayout}}
                 />
               </View>    
 
 
               <View style ={styles.slide3}>
                 <Image 
-                        source ={{uri:"https://bit.ly/3FrqceP"}}
-                        style ={{height:"100%", width:"100%"}}
+                        source ={filterData2[2].images}
+                        style ={{height:"100%", width:initialLayout}}
                 />
               </View>
 
               <View style ={styles.slide3}>
                 <Image 
-                        source ={{uri:"https://bit.ly/3K7zz6S"}}
-                        style ={{height:"100%", width:"100%"}}
+                        source ={filterData2[3].images}
+                        style ={{height:"100%", width:initialLayout}}
                 />
               </View>
 
@@ -104,8 +111,9 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
                 <View style={{flexDirection:'row', margin:3}}>
                     <Icon name ="clock" type ="material-community" color = {colors.grey3} size = {25} />
                     <Text style={styles.text9}>{restaurantsData[id].time}</Text>
-                    <Icon name ="phone-in-talk" type ="material-community" color = {colors.grey3} size = {25} iconStyle ={{marginLeft:190}}/>
-                    <TouchableOpacity onPress={()=>{Linking.openURL('tel:{restaurantsData[id].tel}');}}/>
+                    <TouchableOpacity onPress={()=> phonecall(restaurantsData[id].tel.toString(),true)}>
+                    <Icon name ="phone-in-talk" type ="material-community" color = {colors.grey3} size = {25} iconStyle ={{marginLeft:130}}/>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={{flexDirection:'row', margin:3}}>
@@ -119,11 +127,8 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
                 </View>
 
                 <View style={{flexDirection:'row', margin:3}}>
-                    <Icon name ="map-marker-outline" type ="material-community" color = {colors.grey3} size = {25} />
+                    <OpenURLButton url={restaurantsData[id].addresslink}/>
                     <Text style={styles.text9}>{restaurantsData[id].businessAddress}</Text>
-                    <TouchableOpacity onPress={()=>{Linking.openURL('https://www.google.co.in/maps/place/R+City+Mall/@19.0999164,72.9093627,15z/data=!4m5!3m4!1s0x3be7c7cb91a08e4b:0x10408c61181384c3!8m2!3d19.0996843!4d72.9163939');}}>
-                      <Icon name = "directions" type ="material-community" color = {colors.grey3} size = {30} iconStyle ={{marginLeft:87}}/>
-                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -149,7 +154,19 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
           </View>
 
           <View style={styles.view5}>
-                  <Text style={styles.text8}>Review</Text>
+                  <Text style={styles.text8}>What people say</Text>
+                  <Text style={styles.text10}>Review Highlights</Text>
+                  <FlatList 
+                  showsHorizontalScrollIndicator ={false}
+                  horizontal ={true}
+                  data={reviewHighlights}
+                  keyExtractor={(item)=>item.key}
+                  renderItem={({item}) => {
+                    return (<View style={styles.smallCard}>
+                      <Text style={styles.text11}>{item.title}</Text>
+                    </View>
+                )}} />
+
           </View>
 
       </ScrollView>
@@ -204,19 +221,19 @@ view4:{flexDirection:'row',
   marginTop:5
   },
 
-text4:{fontFamily :fonts.android.bold,
   fontSize:13,
+  text4:{
   color:colors.grey3,
   marginLeft:2,
   },
 
-text5:{fontFamily :fonts.android.bold,
+text5:{
   fontSize:13,
   color:colors.grey3,
   marginLeft:2,
   marginRight:5
   },
-text6:{fontFamily :fonts.android.bold,
+text6:{
     fontSize:13,
     color:colors.grey3,
     marginLeft:0,
@@ -286,7 +303,16 @@ text7:{
       fontSize:15,
       fontWeight:"bold",
       color:colors.grey3,
-      textAlign:'center'
+      textAlign: 'justify',
+      paddingRight:70
+    },
+
+    text12:{
+      fontSize:15,
+      fontWeight:"bold",
+      color:colors.grey3,
+      textAlign: 'justify',
+      padding:15
     },
 
     // view6:{
@@ -313,7 +339,7 @@ text7:{
       alignContent:'space-around',
       alignItems:'center',
       padding:5,
-      width:100,
+      maxWidth:150,
       margin:8,
       height:30,
       marginTop:10

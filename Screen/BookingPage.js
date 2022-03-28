@@ -1,15 +1,26 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useState} from 'react'
-import {Icon} from 'react-native-elements'
+import {Button, Icon} from 'react-native-elements'
 import { colors } from '../Global/styles'
 import {restaurantsData} from '../Global/Data'
-import DatePicker from 'react-native-datepicker';
+import DatePicker from 'react-native-datepicker'
 
 
 const BookingPage = ({navigation,id}) => {
 
   // const {id,restaurant} = route.params
   const [date, setDate] = useState(new Date());
+  const [displaymode, setMode] = useState('date');
+   const [isDisplayDate, setShow] = useState(false);
+
+ const showMode = (currentMode) => {
+  setShow(true);
+  setMode(currentMode);
+};
+
+const display = () => {
+  showMode('date')
+}
 
   return (
     <View style={styles.container}>
@@ -26,38 +37,20 @@ const BookingPage = ({navigation,id}) => {
         <Text style={styles.text2}>Restaurnat's address</Text>
         <Text style={styles.text1}>Select Data And Time</Text>
         
-        <View style ={{justifyContent:'center', alignContent:'center'}}>
-
+        <View style ={{justifyContent:'center', alignItems:'center'}}>
+          <Button onPress={display} title="Show date picker!"/>
+          {isDisplayDate && (
                   <DatePicker
-                  
-                  date={date} // Initial date from state
-                  mode="date" // The enum of date, datetime and time
-                  format="DD-MM-YYYY"
-                  minDate="01-01-1960"
-                  maxDate={date}
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  customStyles={{
-                    dateIcon: {
-                      // display: 'none',
-                      
-                    },
-                    dateInput: {
-                      borderWidth:0,
-                      marginStart:1
-                    },
-                    dateText: {
-                      fontWeight:"bold",
-                      fontSize:20,
-                      color:"#79443B",
-                      
-                    },
-                  }}
-                  onDateChange={(date) => {
-                    setDate(date);
-                  }}
-                  />
+                     testID="dateTimePicker"
+                     value={date}
+                     mode={displaymode}
+                     is24Hour={true}
+                     display="default"
+                     onChange={setDate}
+            />
+         )}
         </View>
+        
     </View>
   )
 }

@@ -7,10 +7,7 @@ export const filterData = [{name:"Fast food",image: require('../assets/fastfood.
                     {name:"Vada Pav",image:require("../assets/vadapav.png"),id:"1"},
                 ];
 
-
-
-
-export const filterData2 = [{name:"FINE DINING",images:{uri:'https://bit.ly/3Js1sph'} , id:"0"},
+export const filterData2 = [{name:"FINE DINING",images:{uri:'https://bit.ly/3Js1sph'} , id:0},
                     {name:"CASUAL DINING",images:{ uri:'https://bit.ly/3wlgMka'},id:"6"},
                     {name:"FAST CASUAL",images:{uri:'https://bit.ly/3Js9LBz'},id:"2"},
                     {name:"FAMILY STYLE",images:{uri:'https://bit.ly/3tn8CWe'},id:"3"},
@@ -19,51 +16,70 @@ export const filterData2 = [{name:"FINE DINING",images:{uri:'https://bit.ly/3Js1
                     
               ];
 
-
-
 export const restaurantsData = [
-  {restaurantName:"Mc Donalds", farAway:"21.2",
-  businessAddress:"22 Bessie street, Cape Town",image:"https://bit.ly/33Bb4hT",
+  {restaurantName:"Manuhaar", farAway:"21.2",
+  businessAddress:"Chhatrapati Shivaji International, Western Express Hwy, Navpada, Airport Area, Vile Parle, Mumbai, Maharashtra 400099",
+  image:"https://bit.ly/3Nr5Wik",addresslink:"https://bit.ly/3qCQ96C", 
   averageReview:4.9,numberOfReview:272,coordinates : {lat: -26.1888612, lng: 28.246325} ,discount:10,deliveryTime:15,
   collectTime:5, foodType:"Burgers, Wraps,Milkshakes..." ,rinfo:"Hearing & speech-impaired wait staff serve imaginative takes on Indian classics in an upscale space",
   time:"8 am to 12 pm",approx:"₹1,100 for two",tel:8898258662,menuimg:"https://bit.ly/3CT8LDX",
-  productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
-  {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},{name:"Chicken Burger",
-   price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},],
+  // productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
+  // {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},{name:"Chicken Burger",
+  //  price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},],
   id:0},
   
-  {restaurantName:"KFC", farAway:"12.7",businessAddress:"22 Bessie street, Cape Town",
-  image:"https://bit.ly/33Bb4hT",
+  {restaurantName:"Bayroute Powai", farAway:"12.7",businessAddress:"Transocean House Lake Boulevard Road,Hiranandani Business Park, Powai, Mumbai, Maharashtra 400076",
+  image:"https://bit.ly/3DaTUVP",addresslink:"https://bit.ly/36OBtKz",
   averageReview:4.3, numberOfReview:306, coordinates : {lat: -26.1891648, lng: 28.2441808},
   discount:20,deliveryTime:30,collectTime:10, foodType:"Chicken,Chicken wings... ",rinfo:"Lively buffet restaurant in an upscale hotel offering multi-cuisine fare & a popular Sunday brunch.",
   time:"12 pm to 12 am",approx:"₹1,500 for two",tel:8898258662,menuimg:"https://bit.ly/3CT8LDX",
-  productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
-  {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},
-  {name:"Chicken Burger", price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},
-      ],
+  // productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
+  // {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},
+  // {name:"Chicken Burger", price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},
+  //     ],
   id:1},
   
-  {restaurantName:"Steers", farAway:"5",businessAddress:" 17 Olivia Rd, Johannesburg",
-  image:"https://bit.ly/33Bb4hT",
-   coordinates :{ lat: 19.100544967633148, lng: 72.91652961244789}, averageReview: 4.9,numberOfReview: 1272,
+  {restaurantName:"Hitchki", farAway:"5",businessAddress:"R City Mall, Hitchki, Ground Floor, Lal Bahadur Shastri Rd, Ghatkopar West, Mumbai, Maharashtra 400086",
+  image:"https://bit.ly/3NhUrtL",addresslink:"https://bit.ly/36UdtFW",
+   coordinates :{ lat: 19.100544967633148, lng: 72.91652961244789}, 
+averageReview: 4.9,numberOfReview: 1272,
     discount:12, deliveryTime:25,collectTime:15,foodType:"Flame grilled beef Burgers", rinfo:"Breakfast buffets & informal international meals are served at this open-kitchen hotel restaurant.",
     time:" 9 am to 10 pm",approx:"₹1,000 for two",tel:8898258662,menuimg:"https://bit.ly/3CT8LDX",
-    productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
-    {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},{name:"Chicken Burger",
-     price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},
-      ],
+    // productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
+    // {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},{name:"Chicken Burger",
+    //  price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},
+    //   ],
    id:2},
   
-  {restaurantName:"Roman Pizza", farAway:"7",businessAddress:" 15 Atlas Rd, Kempton Park",
-  image:"https://bit.ly/33Bb4hT",
+  {restaurantName:"Lake View Cafe", farAway:"7",businessAddress:"ground floor, PLot No 2 & 3B, Saki Vihar Rd, near Chinmayand Ashram, Powai, Mumbai, Maharashtra 400087",
+  image:"https://bit.ly/3izHVYq",addresslink:"https://bit.ly/3iGVoh7",
   averageReview:4.3, numberOfReview:700, coordinates: {lat: -26.1845336, lng: 28.2481691},
   discount:null,deliveryTime:20,collectTime:10,foodType:"Chicken pizza, Vegetarian pizza...",rinfo:"Popular for Sunday brunches & breakfast, with Continental & Mexican cuisine in plush surrounds.",
   time:"5 pm to 11 pm", approx:"₹1,200 for two",tel:8898258662,menuimg:"https://bit.ly/3CT8LDX",
-  productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
-    {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},{name:"Chicken Burger",
-     price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},
-      ],
+  // productData:[{name:"Hand cut chips", price:29.30,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate5.png"},
+  //   {name:"Big Mac", price:50.80,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate4.png"},{name:"Chicken Burger",
+  //    price:70,image:"https://bukasapics.s3.us-east-2.amazonaws.com/plate3.png"},
+  //     ],
   id:3},
+  ];
+
+  export const menu = [
+    { key: 1, title: 'BEEF' },
+    { key: 2, title: 'CHICKEN' },
+    { key: 3, title: 'VEGGIE BURGER' },
+    { key: 4, title: 'SHARE BOX' },
+    { key: 5, title: 'Happy Meals' },
+    { key: 6, title: 'Fries' },
+    { key: 7, title: 'Sides' },
+    { key: 8, title: 'Milkshakes' },
+  ] 
+
+  export const reviewHighlights =[
+    {title:"RECOMMENDED",key:0},
+    {title:"INDOOR SEATING",key:1},
+    {title:"AMBIENCE",key:2},
+    {title:"COURTEOUS SERVICE",key:3},
+    {title:"COVER CHARGES",key:4},
   ];
 
 
@@ -101,25 +117,6 @@ export const restaurantsData = [
           
             ] ;
           
-          export const specialData =[
-            {title:"LIMITED OFFER",key:0},
-            {title:"GO CHILLI",key:1},
-            {title:"GO CHEESE",key:2},
-            {title:"MCCHICKEN DELUXE PROMO",key:3},
-          ];    
-          
-          export const menu = [
-            { key: 1, title: 'BEEF' },
-            { key: 2, title: 'CHICKEN' },
-            { key: 3, title: 'VEGGIE BURGER' },
-            { key: 4, title: 'SHARE BOX' },
-            { key: 5, title: 'Happy Meals' },
-            { key: 6, title: 'Fries' },
-            { key: 7, title: 'Sides' },
-            { key: 8, title: 'Milkshakes' },
-          ] 
-
-
           export const menuDetailedData =[
             { 
               meal:"Big Mac",

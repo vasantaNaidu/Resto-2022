@@ -88,7 +88,7 @@ const handleLogIn = () => {
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>  
 
-        <TouchableOpacity onPress = {()=>navigation.navigate('forgotpass')}>
+        <TouchableOpacity onPress = {()=>navigation.navigate('Forgotpass')}>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
 

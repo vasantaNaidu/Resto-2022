@@ -1,24 +1,46 @@
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, FlatList } from 'react-native'
-import React from 'react'
+import React,{useCallback} from 'react'
 import {Icon} from 'react-native-elements'
-
+import { Linking } from 'react-native'
 import {colors} from "../Global/styles";
 
 const SearchResultCard = ({
     OnPressRestaurantCard,
     restaurantName,
-    deliveryAvailabe,
-    discountAvailable ,
-    discountPercent ,
     numberOfReview ,
     businessAddress ,
-    farAway ,
     averageReview ,
     images,
-    productData
+    addresslink
   
 
 }) => {
+
+    const OpenURLButton = ({ url, children }) => {
+        const handlePress = useCallback(async () => {
+          // Checking if the link is supported for links with custom URL scheme.
+          const supported = await Linking.canOpenURL(url);
+      
+          if (supported) {
+            // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+            // by some browser in the mobile
+            await Linking.openURL(url);
+          } else {
+            Alert.alert(`Don't know how to open this URL: ${url}`);
+          }
+        }, [url]);
+    
+        return (
+          <TouchableOpacity title= {children} onPress={handlePress}>
+              <Icon 
+              name ="map-marker-outline" 
+              type ="material-community" 
+              color = {colors.grey3} 
+              size = {25} 
+              iconStyle ={{ margin:20  }} />
+          </TouchableOpacity>
+        )};
+
   return (
     <View style={{paddingBottom:20}}>
         <TouchableOpacity onPress ={OnPressRestaurantCard}>
@@ -43,17 +65,9 @@ const SearchResultCard = ({
                          <Text style ={styles.text5}>{restaurantName}</Text>    
                         </View>
             
-            <View style ={{flexDirection:"row"}}>
-                <View style ={styles.view4}>
-                    <Icon 
-                        name ="place"
-                        type ="material"
-                        color ={colors.CardComment}
-                        size ={18}
-                        iconStyle ={{marginTop:3,marginLeft:-3}}
-                    />
-
-                    <Text style ={styles.view5}>{farAway} Min</Text>
+            <View style ={{flexDirection:"row",borderBottomWidth:2,borderColor:colors.grey4}}>
+                <View style ={{borderRightColor:colors.grey4,borderRightWidth:2}}>
+                    <OpenURLButton url={addresslink}/>
                 </View>
                 <View style ={{flex:9}}>
                     <Text style ={styles.text6}>{businessAddress}</Text>
@@ -97,6 +111,7 @@ const styles = StyleSheet.create({
         marginHorizontal:9,
         borderTopRightRadius:5,
         borderTopLeftRadius:5,
+        borderColor:2,
         },
         
         image: {position:"absolute",
@@ -150,7 +165,7 @@ const styles = StyleSheet.create({
               },
       
         text5:{
-            fontSize:17,
+            fontSize:20,
             fontWeight:'bold',
             color:colors.grey1,
         },

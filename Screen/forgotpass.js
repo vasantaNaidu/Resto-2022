@@ -6,11 +6,11 @@ import { auth } from "../db/firebaseconfig";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const forgotpass = ({navigation}) => {
+const Forgotpass = ({navigation}) => {
     
     const [email, setEmail] = useState("");
 
-    const forgotPassword = () => {
+    const ForgotPassword = () => {
         sendPasswordResetEmail(auth,email)
         .then(() => {
           alert("reset email sent to " + email);
@@ -65,7 +65,7 @@ const forgotpass = ({navigation}) => {
     );
   }
 
-export default forgotpass
+export default Forgotpass
 
 const styles = StyleSheet.create({
     wrapper: {

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { AppRegistry,Text, SafeAreaView, StyleSheet,
-   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View, Platform} from "react-native";
+   TextInput, TouchableOpacity, ImageBackground, Image, StatusBar, View,} from "react-native";
 AppRegistry.registerComponent('AndroidFonts', () => AndroidFonts);
 import { auth, db} from "../db/firebaseconfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import DatePicker from 'react-native-datepicker';
-import { doc, setDoc, Timestamp } from "firebase/firestore"; 
+import { doc, setDoc ,collection } from "@firebase/firestore";
 
+
+const ref = doc(collection(db,"users"));
+const hey=() => [];
 
 const Signup=(navigation)=> {
 
@@ -15,27 +17,47 @@ const Signup=(navigation)=> {
     const [PhoneNo, setPhoneNo] = useState("");
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
-    const [date, setDate] = useState();
 
-    const userData = {
-        dateandtime : Timestamp.fromDate(new Date()),
-        userName : setName,
-        userDOB : setDate,
-        userPhone : setPhoneNo,
-        userEmail : setEmail,
-        userPass : setPassword
-    };
+  //   const phoneNumberFormat = (num) => {
+  //     let newNum = num.replace(/[-]+/g, '');
+  //     let x;
+  //     if (newNum.length <= 3) {
+  //         x = newNum;
+  //     } else if (newNum.length > 3 && newNum.length <= 6) {
+  //         x = newNum.slice(0, 3) + "-" + newNum.slice(3, 6)
+  //     } else {
+  //         x = newNum.slice(0, 3) + "-" + newNum.slice(3, 6) + "-" + newNum.slice(6, 10)
+  //     }
+  //     return x;
+  // };
+  // const validatePhone = [required("Phone number is required"), phoneNumberFormat];
 
-    const handleSignUp  =()=> {
+    const handleSignUp = (newdata)=> {
+      if(!Name|!PhoneNo|!Email|!Password){
+        alert("ERROR!!!Enter all Fields Details")
+      }
+      else if(PhoneNo.length!=10){
+        alert("ERROR!!!Invalid Mobile Number")
+      }
+      else {
         createUserWithEmailAndPassword(auth,Email, Password)
-        .then((userCredentials) = async() => {
-            // const user = userCredentials.user;
-            const re = await setDoc(doc(db, "users", "one"), userData);
-            // console.log('Registered with:', user.email)
-            console.log('Data is sent:',re)
+        .then((userCredentials) => {
+            const user = userCredentials.user;
+            // console.log(user)
+              
+              // .doc(newdata.id)
+              setDoc(ref,newdata)
+              .then(() => {
+                hey((prev)=>[newdata, ...prev]);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+            
         })
         .catch(error => alert(error.message))
     }
+  }
 
     return ( 
         <SafeAreaView style={styles.container}>
@@ -53,51 +75,18 @@ const Signup=(navigation)=> {
                 placeholder="Name" 
                 style={styles.inputView} 
                 onChangeText={(Name) => setName(Name)}/>
-
-                <View style={styles.inputView1}>
-                <DatePicker
-                  
-                  date={date} // Initial date from state
-                  mode="date" // The enum of date, datetime and time
-                  format="DD-MM-YYYY"
-                  minDate="01-01-1960"
-                  maxDate={date}
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  customStyles={{
-                    dateIcon: {
-                      display: 'none',
-                      
-                    },
-                    dateInput: {
-                      borderWidth:0,
-                      marginStart:1
-                    },
-                    dateText: {
-                      fontWeight:"bold",
-                      fontSize:20,
-                      color:"#79443B",
-                      
-                    },
-                  }}
-                  onDateChange={(date) => {
-                    setDate(date);
-                  }}
-                  />
-                  <Text style={{fontSize:20,alignSelf:'center', marginLeft:35, color:'white', fontWeight:'bold'}}> - Date of Birth</Text>
-                </View>
             <TextInput
                 placeholder="Mobile number"
                 style={styles.inputView} 
                 keyboardType="numeric"
+                maxLength={10}
+                // validate={validatePhone}
                 onChangeText={(PhoneNo) => setPhoneNo(PhoneNo)}/>
             <TextInput
                 placeholder="Email ID"
                 style={styles.inputView} 
                 onChangeText={(Email) => setEmail(Email)}/>
-
             <View style={{flexDirection:'row',alignContent:'center',paddingLeft:40}}>
-
               <TextInput 
                 placeholder="Password"
                 style={styles.PasswordinputView} 
@@ -105,14 +94,14 @@ const Signup=(navigation)=> {
                 onChangeText={(Password) => setPassword(Password)}/>
                 <TouchableOpacity 
                     onPress={()=>{setisSecureEntry((prev)=>!prev);}}
-                    style={{paddingRight:55,height:50}}>
+                    style={{paddingRight:50,height:50}}>
                     <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
                 </TouchableOpacity>
             </View>
 
             <Text style={styles.description}>*password must contain 1 capital, small, number and special character.</Text>
 
-            <TouchableOpacity style={styles.signBtn} onPress={handleSignUp}>
+            <TouchableOpacity style={styles.signBtn} onPress={()=>handleSignUp({Name,PhoneNo,Email,Password})}>
                 <Text style={styles.signText}>REGISTER</Text>
             </TouchableOpacity>
 

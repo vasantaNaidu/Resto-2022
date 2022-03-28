@@ -137,6 +137,7 @@ export const Home = ({navigation}) => {
                       businessAddress ={item.businessAddress}
                       averageReview ={item.averageReview}
                       numberOfReview ={item.numberOfReview}
+                      addresslink = {item.addresslink}
                       
                   />
                   </TouchableOpacity>
@@ -163,6 +164,7 @@ export const Home = ({navigation}) => {
                            businessAddress ={item.businessAddress}
                            averageReview ={item.averageReview}
                            numberOfReview ={item.numberOfReview}
+                           addresslink={item.addresslink}
                            
                        />
                 </View>
