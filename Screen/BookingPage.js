@@ -11,6 +11,7 @@ const BookingPage = ({navigation,route}) => {
   const [indexCheckDay, setIndexCheckDay] = useState("0")
   const [indexCheckTime, setIndexCheckTime] = useState("0")
   const [Counter,setCounter] = useState(1);
+  const [Iconcount,setIconcount] = useState(1);
 
   const incrementCounter = () => setCounter(Counter + 1);
   let decrementCounter = () => setCounter(Counter - 1);
@@ -36,7 +37,7 @@ const BookingPage = ({navigation,route}) => {
         <Text style={styles.text1}>{restaurantsData[id].restaurantName}</Text>
         <Text style={styles.text2}>{restaurantsData[id].located}</Text>
         
-        <Text style={styles.text1}>Select Data And Time</Text>
+        <Text style={styles.text1}>Step 1: Select Data And Time</Text>
         <Text style={styles.text1}>What Day?</Text>
        <View style={{margin:5,marginLeft:5}}>
           <FlatList 
@@ -73,7 +74,7 @@ const BookingPage = ({navigation,route}) => {
                 )}} />
         </View>
         <Text style={styles.text1}>How many People?</Text>
-        <View style={{flexDirection:'row', justifyContent:'center',marginTop:5}}>
+        <View style={{flexDirection:'row', justifyContent:'center',marginTop:5, marginBottom:10}}>
                <Icon
                name="minus"
                type = "material-community"
@@ -88,8 +89,27 @@ const BookingPage = ({navigation,route}) => {
                             color = {colors.black}
                             size = {35}
                             onPress = {incrementCounter}
-               />       
+               />  
+               <View>
+                 { Counter >= 2?
+                              (<Icon
+                              name='account-multiple'
+                              type='material-community'
+                              color={colors.black}
+                              size={35}/>):
+                              (<Icon 
+                                name ='person'
+                                type = 'material'
+                                color ={colors.black}
+                                size ={35}
+                            />)
+
+                  }    
+                </View>     
         </View>
+
+        <Text style={styles.text1}>Step 2: Enter Guest Details</Text>
+        <Text style={styles.text2}>Selected Date and Time</Text>
         </ScrollView>
         </View>
   )
