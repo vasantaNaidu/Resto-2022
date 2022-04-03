@@ -1,17 +1,41 @@
-import { StyleSheet, Text, View, Dimensions, FlatList, Presable } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, FlatList, Presable, Alert } from 'react-native'
 import React, {useState} from 'react'
 import {Button, Icon} from 'react-native-elements'
 import { colors } from '../Global/styles'
 import {days, restaurantsData, Schedule} from '../Global/Data'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 const BookingPage = ({navigation,route}) => {
 
   const {id,rName,raddress} = route.params
+  const [loading, setLoading] = useState(false);
   const [indexCheckDay, setIndexCheckDay] = useState("0")
   const [indexCheckTime, setIndexCheckTime] = useState("0")
   const [Counter,setCounter] = useState(1);
-  const [Iconcount,setIconcount] = useState(1);
+  const availability = () =>{
+    if(!setIndexCheckDay|!setIndexCheckTime){
+      alert("Error! Select Date and Time")
+    }
+    else{
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      Alert.alert(
+        "",
+        "Available: 50",
+        [
+          {
+            text:"okay", 
+            onPress:()=>{
+              
+              navigation.navigate("Guestdetails")}
+          }
+        ]
+        )
+    }, 3000);
+  } 
+  }
 
   const incrementCounter = () => setCounter(Counter + 1);
   let decrementCounter = () => setCounter(Counter - 1);
@@ -20,9 +44,9 @@ const BookingPage = ({navigation,route}) => {
   }
 
   return (
-    <View>
+  <View>
     <View style={styles.container}>
-      <View style ={styles.view2}>
+      <View style ={styles.view1}>
                         <Icon 
                             name ="arrow-left"
                             type = "material-community"
@@ -34,6 +58,14 @@ const BookingPage = ({navigation,route}) => {
         </View>
       <ScrollView 
       showsVerticalScrollIndicator = {true} >
+        <Spinner
+          //visibility of Overlay Loading Spinner
+          visible={loading}
+          //Text with the Spinner
+          textContent={'Loading...'}
+          //Text style of the Spinner Text
+          textStyle={styles.spinnerTextStyle}
+        />
         <Text style={styles.text1}>{restaurantsData[id].restaurantName}</Text>
         <Text style={styles.text2}>{restaurantsData[id].located}</Text>
         
@@ -107,11 +139,14 @@ const BookingPage = ({navigation,route}) => {
                   }    
                 </View>     
         </View>
-
-        <Text style={styles.text1}>Step 2: Enter Guest Details</Text>
-        <Text style={styles.text2}>Selected Date and Time</Text>
-        </ScrollView>
-        </View>
+          <View style={styles.view2}>
+              <TouchableOpacity style={styles.availabilitybox} onPress={availability}>
+                 <Text style={{fontSize:20}}>Check Availability</Text>
+              </TouchableOpacity>
+          </View>
+        
+      </ScrollView>
+    </View>
   )
 }
 
@@ -122,7 +157,7 @@ const styles = StyleSheet.create({
     height:80,
     marginTop:30
   },
-  view2:{margin:10,
+  view1:{margin:10,
     width:40,
     height:40,
     alignItems:"center",
@@ -175,5 +210,21 @@ const styles = StyleSheet.create({
       height:40,
       paddingLeft:14,
       paddingTop:5
+    },
+    view2:{
+      justifyContent:'center',
+      margin:20,
+      marginLeft:90
+    },
+    availabilitybox:{
+      width:'80%',
+      height:50,
+      borderRadius:5,
+      backgroundColor:colors.buttons,
+      alignItems:'center',
+      justifyContent:'center'
+    },
+    spinnerTextStyle: {
+      color: 'black',
     },
 })

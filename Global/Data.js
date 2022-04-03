@@ -83,7 +83,11 @@ averageReview: 4.9,numberOfReview: 1272,
   ];
 
   import moment from 'moment';
-
+var duration = moment.duration(30,'minute')
+var duration1 = moment.duration(60,'minute')
+var duration2 = moment.duration(90,'minute')
+var duration3 = moment.duration(120,'minute')
+var duration4 = moment.duration(180,'minute')
   export const days = [ 
     {key:0,title:'Today'}, 
     {key:1,title:'Tomorrow'},
@@ -91,12 +95,11 @@ averageReview: 4.9,numberOfReview: 1272,
     {key:3, title: moment().add(3, 'days').format('ddd, MMM D')} ];
   export const Schedule = [
     {key:0, title:'Now'},
-    {key:1, title: moment().add(30,'min').format('H: mm a')},
-    {key:2, title: moment().add(30,'min').format('H: mm a')},
-    {key:3, title: moment().add(30,'min').format('H: mm a')},
-    {key:4, title: moment().add(30,'min').format('H: mm a')},
-    {key:5, title: moment().add(30,'min').format('H: mm a')},
-    {key:6, title: moment().add(30,'min').format('H: mm a')},
+    {key:1, title: moment().add(duration).format('H: mm a')},
+    {key:2, title: moment().add(duration1).format('H: mm a')},
+    {key:3, title: moment().add(duration2).format('H: mm a')},
+    {key:4, title: moment().add(duration3).format('H: mm a')},
+    {key:5, title: moment().add(duration4).format('H: mm a')},
   ];
   const times = [ '9:00 AM', '11:10 AM', '12:00 PM', '1:50 PM', '4:30 PM', '6:00 PM', '7:10 PM', '9:45 PM' ];
     

@@ -4,9 +4,9 @@ import {auth} from "../db/firebaseconfig"
 import {
   View,
   Text,
-  Switch,
   StyleSheet,
-  Alert
+  Alert,
+  Image
  
 } from 'react-native';
 
@@ -23,10 +23,8 @@ import {
     Icon
      } from 'react-native-elements'
 
-import {colors, title} from '../Global/styles'
+import {colors} from '../Global/styles'
 import { SignInContext } from '../contexts/authContext'
-import Communications from 'react-native-communications'
-
 import email from 'react-native-email'
 
 
@@ -91,9 +89,10 @@ const DrawerContent = (props)=> {
     return(
         <View style ={styles.container}>
                  <DrawerContentScrollView {...props}>
-                 <View style ={{backgroundColor:colors.buttons,marginTop:10,marginBottom:20,height:160}}>
-                <View style = {{flexDirection:'row', alignItems:'center',
-                                    paddingLeft:20,paddingVertical:10}}>
+                 <View style ={{backgroundColor:colors.buttons,marginBottom:20,height:170}}>
+                     <Image source={require('../Screen/textlogo.png')} style = {{marginLeft:10,height:'100%',width: '90%'}}/>
+                {/* <View style = {{flexDirection:'row', alignItems:'center',
+                                    padding:10}}>
                     <Avatar 
                         rounded
                         avatarStyle ={styles.avatar}
@@ -107,16 +106,16 @@ const DrawerContent = (props)=> {
                         <Text style ={{color:colors.cardbackground,fontSize:14}} > kittysan@gmail.com</Text>
                     </View>
 
-                </View>
+                </View> */}
 
                 <View style ={{flexDirection:'row',justifyContent:"space-evenly",paddingBottom:5}}>
 
-                    <View style ={{flexDirection:'row', marginTop:0,}}>
+                    {/* <View style ={{flexDirection:'row', marginTop:0,}}>
                         <View style = {{marginLeft:10,alignItems:"center", justifyContent:"center" }}  >
                             <Text  style ={{fontWeight:'bold',color:colors.cardbackground,fontSize:18 }}>1</Text>
                             <Text style ={{color:colors.cardbackground,fontSize:14}} >My Favorites</Text>
                         </View>
-                    </View>
+                    </View> */}
 
                     {/* <View style ={{flexDirection:'row', marginTop:0}}>
                          <View style = {{marginLeft:10,alignItems:"center", justifyContent:"center" }}  >
@@ -241,28 +240,28 @@ const styles = StyleSheet.create({
         
     },
 
-    preferences:{
-        fontSize: 16,
-        color:colors.grey2,
-         paddingTop:10,
-         paddingLeft:20,
-    },
+    // preferences:{
+    //     fontSize: 16,
+    //     color:colors.grey2,
+    //      paddingTop:10,
+    //      paddingLeft:20,
+    // },
 
-    switchText:{
-        flexDirection:"row",
-        alignItems:"center",
-        justifyContent:"space-between",
-        paddingLeft:20,
-        paddingVertical:5,
-        paddingRight:10
-    },
-    darkthemeText:{
-        fontSize: 16,
-        color:colors.grey2,
-         paddingTop:10,
-         paddingLeft:0,
-         fontWeight:"bold"
-    }
+    // switchText:{
+    //     flexDirection:"row",
+    //     alignItems:"center",
+    //     justifyContent:"space-between",
+    //     paddingLeft:20,
+    //     paddingVertical:5,
+    //     paddingRight:10
+    // },
+    // darkthemeText:{
+    //     fontSize: 16,
+    //     color:colors.grey2,
+    //      paddingTop:10,
+    //      paddingLeft:0,
+    //      fontWeight:"bold"
+    // }
     
 })
 
