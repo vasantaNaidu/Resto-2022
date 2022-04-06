@@ -47,6 +47,7 @@ const BookingPage = ({navigation,route}) => {
   <View>
     <View style={styles.container}>
       <View style ={styles.view1}>
+                <View style ={{alignItems:"center",justifyContent:'center', marginLeft:10}}>
                         <Icon 
                             name ="arrow-left"
                             type = "material-community"
@@ -54,6 +55,10 @@ const BookingPage = ({navigation,route}) => {
                             size = {25}
                             onPress ={()=>navigation.goBack()}
                         />
+                        </View>
+                        <View style ={{alignItems:"center", justifyContent:"center",marginLeft:10,width:200}}>
+                      <Text style={{fontWeight:'bold',fontSize:20}}>Reservation Details</Text>
+                      </View>
         </View>
         </View>
       <ScrollView 
@@ -139,6 +144,8 @@ const BookingPage = ({navigation,route}) => {
                   }    
                 </View>     
         </View>
+
+        <Text style={styles.text1}>Step 2: Enter Guest Details</Text>
           <View style={styles.view2}>
               <TouchableOpacity style={styles.availabilitybox} onPress={availability}>
                  <Text style={{fontSize:20}}>Check Availability</Text>
@@ -157,11 +164,12 @@ const styles = StyleSheet.create({
     height:80,
     marginTop:30
   },
-  view1:{margin:10,
+  view1:{margin:15,
     width:40,
     height:40,
     alignItems:"center",
-    justifyContent:"center",
+    justifyContent:'space-between',
+    flexDirection:'row'
    },
    text1:{
     margin:10,
