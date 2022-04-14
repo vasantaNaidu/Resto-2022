@@ -82,6 +82,12 @@ averageReview: 4.9,numberOfReview: 1272,
     {title:"COVER CHARGES",key:4},
   ];
 
+  export const Review = [
+    {reviewer:'Pallavi',des:'Liked the Restaurant Ambience',img:{uri:'https://bit.ly/3vji7FP'},key:0},
+    {reviewer:'Riyas',des:'Good. Liked the Service.',img:{uri:'https://bit.ly/3rrk6H1'},key:1},
+    {reviewer:'Priti',des:'Great, Liked the Service!! Enjoyed',img:{uri:'https://bit.ly/3jHrvxu'},key:2}
+  ];
+
   import moment from 'moment';
 var duration = moment.duration(30,'minute')
 var duration1 = moment.duration(60,'minute')

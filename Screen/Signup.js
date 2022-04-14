@@ -18,20 +18,6 @@ const Signup=(navigation)=> {
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
 
-  //   const phoneNumberFormat = (num) => {
-  //     let newNum = num.replace(/[-]+/g, '');
-  //     let x;
-  //     if (newNum.length <= 3) {
-  //         x = newNum;
-  //     } else if (newNum.length > 3 && newNum.length <= 6) {
-  //         x = newNum.slice(0, 3) + "-" + newNum.slice(3, 6)
-  //     } else {
-  //         x = newNum.slice(0, 3) + "-" + newNum.slice(3, 6) + "-" + newNum.slice(6, 10)
-  //     }
-  //     return x;
-  // };
-  // const validatePhone = [required("Phone number is required"), phoneNumberFormat];
-
     const handleSignUp = (newdata)=> {
       if(!Name|!PhoneNo|!Email|!Password){
         alert("ERROR!!!Enter all Fields Details")
@@ -44,7 +30,6 @@ const Signup=(navigation)=> {
         .then((userCredentials) => {
             const user = userCredentials.user;
             // console.log(user)
-              
               // .doc(newdata.id)
               setDoc(ref,newdata)
               .then(() => {
@@ -67,7 +52,7 @@ const Signup=(navigation)=> {
                 barStyle='dark-content'
                 backgroundColor="#926C44"
              />          
-          <ImageBackground source={require('./bglogin.jpg')} resizeMode="cover" style={styles.image} blurRadius={1}></ImageBackground>
+          <ImageBackground source={require('./bglogin.jpg')} resizeMode="cover" style={styles.image} blurRadius={1}/>
           <Image source={require('./textlogo.png')} style={styles.textlogo} />
             <Text style={styles.headtext}>CREAT YOUR ACCOUNT!</Text>
             <Text style={styles.detail}>START YOUR HUNGRY {'\n'}JOURNEY TODAY.</Text>
@@ -99,8 +84,6 @@ const Signup=(navigation)=> {
                 </TouchableOpacity>
             </View>
 
-            <Text style={styles.description}>*password must contain 1 capital, small, number and special character.</Text>
-
             <TouchableOpacity style={styles.signBtn} onPress={()=>handleSignUp({Name,PhoneNo,Email,Password})}>
                 <Text style={styles.signText}>REGISTER</Text>
             </TouchableOpacity>
@@ -108,6 +91,7 @@ const Signup=(navigation)=> {
         </SafeAreaView>
     );
 };
+export default Signup;
 
 const styles = StyleSheet.create({
     container: {
@@ -176,11 +160,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
       },
 
-      description: {
-        fontSize:10,
-        alignItems: "flex-start",
-      },
-
       signBtn: {
         width: "40%",
         borderRadius: 5,
@@ -221,4 +200,3 @@ const styles = StyleSheet.create({
 });
 
 
-export default Signup;

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, FlatList, Presable, Alert } from 'react-native'
+import { StyleSheet, Text, View,TextInput, FlatList, Alert } from 'react-native'
 import React, {useState} from 'react'
 import {Button, Icon} from 'react-native-elements'
 import { colors } from '../Global/styles'
@@ -44,8 +44,9 @@ const BookingPage = ({navigation,route}) => {
   }
 
   return (
-  <View>
+
     <View style={styles.container}>
+      
       <View style ={styles.view1}>
                 <View style ={{alignItems:"center",justifyContent:'center', marginLeft:10}}>
                         <Icon 
@@ -60,7 +61,7 @@ const BookingPage = ({navigation,route}) => {
                       <Text style={{fontWeight:'bold',fontSize:20}}>Reservation Details</Text>
                       </View>
         </View>
-        </View>
+        
       <ScrollView 
       showsVerticalScrollIndicator = {true} >
         <Spinner
@@ -146,6 +147,15 @@ const BookingPage = ({navigation,route}) => {
         </View>
 
         <Text style={styles.text1}>Step 2: Enter Guest Details</Text>
+        <TextInput
+        placeholder='Enter Guest Name'
+        style={styles.inputView}/>
+        <TextInput
+        placeholder='Enter Menu (if any)'
+        style={styles.inputView}/>
+        <TextInput
+        placeholder='Remarks'
+        style={styles.inputView}/>
           <View style={styles.view2}>
               <TouchableOpacity style={styles.availabilitybox} onPress={availability}>
                  <Text style={{fontSize:20}}>Check Availability</Text>
@@ -153,7 +163,8 @@ const BookingPage = ({navigation,route}) => {
           </View>
         
       </ScrollView>
-    </View>
+      </View>
+
   )
 }
 
@@ -161,8 +172,10 @@ export default BookingPage
 
 const styles = StyleSheet.create({
   container:{
-    height:80,
-    marginTop:30
+    justifyContent:"center",
+    alignContent:"center",
+    flex:1,
+    paddingTop:30
   },
   view1:{margin:15,
     width:40,
@@ -234,5 +247,16 @@ const styles = StyleSheet.create({
     },
     spinnerTextStyle: {
       color: 'black',
+    },
+    inputView: {
+      width: "80%",
+      height: 50,
+      paddingTop:10,
+      marginLeft:10,
+      alignItems: "center",
+      borderBottomColor: 'black', 
+      borderBottomWidth: 3,
+      fontWeight:"bold",
+      fontSize:20,
     },
 })
