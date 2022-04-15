@@ -31,7 +31,7 @@ const Myaccount = ({navigation}) => {
                   <Text style={{fontSize:20, paddingLeft:15}}>View Booking History</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity style={{alignSelf:'flex-start'}} onPress={()=>{navigation.navigate("Favourites")}}>
                 <View style={{flexDirection:'row', paddingTop:30}}>
                   <Icon name ="heart" type ="material-community" color = {colors.grey3} size = {30}/>
                   <Text style={{fontSize:20, paddingLeft:15}}>My Favourites</Text>
