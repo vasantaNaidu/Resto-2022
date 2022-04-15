@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TextInput, FlatList, Alert } from 'react-native'
+import { StyleSheet, Text, View,TextInput, FlatList, Alert, Linking } from 'react-native'
 import React, {useState} from 'react'
 import {Button, Icon} from 'react-native-elements'
 import { colors } from '../Global/styles'
@@ -22,14 +22,17 @@ const BookingPage = ({navigation,route}) => {
     setTimeout(() => {
       setLoading(false);
       Alert.alert(
-        "",
-        "Available: 50",
+        "confirm Your Booking",
+        "Are You Sure?",
         [
           {
             text:"okay", 
-            onPress:()=>{
+            onPress:()=>{Linking.canOpenURL("https://pmny.in/bI5gqRdzfG00")}
               
-              navigation.navigate("Guestdetails")}
+              // navigation.navigate("Guestdetails")}
+          },
+          {
+            text:"no"
           }
         ]
         )
