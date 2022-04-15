@@ -32,7 +32,7 @@ const DrawerNavigator = ()=>{
                 }}
             />
 
-            <Drawer.Screen 
+            {/* <Drawer.Screen 
                 name = "Business consoleScreen"
                 component ={BusinessConsoleScreen}
 
@@ -48,14 +48,14 @@ const DrawerNavigator = ()=>{
                         />
                     )
                 }}
-            />
+            /> */}
 
             <Drawer.Screen 
                 name = "Settings"
                 component ={Settings}
 
                 options = {{
-                    title:'Settings',
+                    title:'Edit Profile',
                     drawerIcon: ({focussed,size}) =>(
                         <Icon 
                             type = "material-community"

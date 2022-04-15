@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, Dimensions, ScrollView, Image, FlatList} from 'react-native'
 import React, {useCallback} from 'react'
 import {colors} from '../Global/styles'
-import {restaurantsData, menu, filterData2, reviewHighlights } from '../Global/Data'
+import {restaurantsData, menu, filterData2, reviewHighlights, Review } from '../Global/Data'
 import RestaurantHeader from '../Components/RestaurantHeader'
-import { Icon } from 'react-native-elements'
+import { Icon, Avatar } from 'react-native-elements'
 import { TouchableOpacity} from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
 import { Linking } from 'react-native'
@@ -153,7 +153,7 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
                   style={{height:100,width:200,margin:20,resizeMode:'cover'}} /> 
           </View>
 
-          <View style={styles.view5}>
+          <View style={styles.view6}>
                   <Text style={styles.text8}>What people say</Text>
                   <Text style={styles.text10}>Review Highlights</Text>
                   <FlatList 
@@ -164,6 +164,24 @@ const RestaurantsHomeScreen = ({navigation,route}) => {
                   renderItem={({item}) => {
                     return (<View style={styles.smallCard}>
                       <Text style={styles.text11}>{item.title}</Text>
+                    </View>
+                )}} />
+                <FlatList 
+                  showsHorizontalScrollIndicator ={false}
+                  horizontal ={true}
+                  data={Review}
+                  keyExtractor={(item)=>item.key}
+                  renderItem={({item}) => {
+                    return (<View style={styles.ReviewCard}>
+                      <View style={styles.avatar}>
+                      <Avatar 
+                        rounded
+                        // avatarStyle ={styles.avatar}
+                        size = {40}
+                        source = {item.img}/>
+                      <Text style={styles.text13}>{item.reviewer}</Text>
+                      </View>
+                      <Text style={styles.text11}>{item.des}</Text>
                     </View>
                 )}} />
 
@@ -268,6 +286,15 @@ text7:{
     height:"50%",
     alignSelf:'center',
   },
+  view6:{ 
+    flex:3,
+    marginTop : 20,
+    borderWidth:1,
+    width:"100%",
+    height:"50%",
+    alignSelf:'center',
+    marginBottom:30
+  },
   
   logo : {
     height:50,
@@ -315,6 +342,20 @@ text7:{
       padding:15
     },
 
+    text13:{
+      fontSize:15,
+      fontWeight:"bold",
+      color:colors.grey3,
+      textAlign: 'justify',
+      padding:15,
+    },
+
+    avatar:{
+      flexDirection:'row',
+      marginTop:5,
+      marginBottom:5
+    },
+
     // view6:{
     // flex:3,
     // marginTop : 20,
@@ -342,6 +383,18 @@ text7:{
       maxWidth:150,
       margin:8,
       height:30,
+      marginTop:10
+    },
+    ReviewCard :{
+      borderRadius:10,
+      backgroundColor:'#dcdcdc',
+      justifyContent:'space-evenly',
+      alignContent:'space-around',
+      alignItems:'center',
+      padding:5,
+      maxWidth:250,
+      margin:8,
+      height:100,
       marginTop:10
     },
 

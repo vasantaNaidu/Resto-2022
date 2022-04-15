@@ -13,15 +13,11 @@ const ClientSearch = createStackNavigator()
 export function Clientstack({navigation,route}) {
 
     useLayoutEffect(()=>{
-
         const routeName = getFocusedRouteNameFromRoute(route);
-        if(routeName === "RestaurantsHomeScreen" && "BookingPage"){
+        if (routeName === "RestaurantsHomeScreen"){
             navigation.setOptions({tabBarVisible:false})
-        }else{
-            navigation.setOptions({tabBarVisible:true})
         }
-        
-        },[navigation,route])
+    })
 
   return (
     <ClientSearch.Navigator>
@@ -49,7 +45,8 @@ export function Clientstack({navigation,route}) {
             component ={RestaurantsHomeScreen}
             options = {
                 ()=>({
-                    headerShown:false
+                    headerShown:false,
+                    tabBarStyle: { display: "none" },
                 })
         }/>
 
@@ -58,7 +55,7 @@ export function Clientstack({navigation,route}) {
             component ={BookingPage}
             options = {
                 ()=>({
-                    headerShown:false
+                    headerShown:false,
                 })
         }/>
 

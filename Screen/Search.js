@@ -1,6 +1,5 @@
 import React from 'react'
-import {View, Text,StyleSheet,FlatList,ImageBackground,
-  Dimensions,TouchableWithoutFeedback, ImageBackgroundComponent} from 'react-native'
+import {View, Text,StyleSheet,FlatList,ImageBackground,Dimensions,TouchableWithoutFeedback} from 'react-native'
 import SearchComponent from '../Components/SearchComponent'
 import {filterData2} from "../Global/Data"
 import {colors} from "../Global/styles";
@@ -11,10 +10,8 @@ export default function SearchScreen({navigation}){
 
     return(
         <View style ={{flex:1,marginBottom:10,paddingTop:10}}>
-           
                 <SearchComponent />
-            <View style ={{marginTop:130, marginBottom:310}}>
-
+                <View style ={{marginTop:130, marginBottom:310}}>
                 <View>
                 <FlatList 
                     style ={{}}
@@ -40,69 +37,16 @@ export default function SearchScreen({navigation}){
                             </View>
                         </TouchableWithoutFeedback>
                     )}
-
                     horizontal ={false}
                     showsverticalScrollIndicator = {false}
                     numColumns ={2}
                     ListHeaderComponent = { <Text style = {styles.listHeader}>Top Categories</Text>}
-                    // ListFooterComponent = {<Footer />}
                 />
                 </View>
-
-
             </View>
-
         </View>
     )
 }
-
-
-
-// const Footer = ()=>{
-//     return(
-//         <View style ={{marginTop:20,marginBottom:300 }}>
-
-//                 <View>
-//                 <FlatList 
-//                     style ={{marginBottom:10}}
-//                     data = {filterData2}
-//                     keyExtractor ={item=>item.id}
-//                     renderItem = {({item,index})=>(
-//                         <TouchableWithoutFeedback
-//                                  onPress ={()=>{
-//                                     navigation.navigate("SearchResult",{item:item.name})
-//                                 }}
-//                                 >
-//                             <View style = {styles.imageView}>
-//                               <ImageBackground
-//                                     style ={styles.image}
-//                                     source = {item.images}
-//                                 >
-                                    
-//                                 <View style ={styles.textView}>
-//                                     <Text style ={{color:colors.cardbackground}}>{item.name}</Text>
-//                                 </View>
-//                                 </ImageBackground>  
-//                             </View>
-//                         </TouchableWithoutFeedback>
-//                     )}
-
-//                     horizontal ={false}
-//                     showsverticalScrollIndicator = {false}
-//                     numColumns ={2}
-//                     ListHeaderComponent = { <Text style = {styles.listHeader}>More categories</Text>}
-                  
-//                 />
-//                 </View>
-
-
-//             </View>
-
-//     )
-// }
-
-
-
 
 const styles = StyleSheet.create({
 
