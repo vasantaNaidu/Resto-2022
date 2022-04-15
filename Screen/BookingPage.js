@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TextInput, FlatList, Alert } from 'react-native'
+import { StyleSheet, Text, View,TextInput, FlatList, Alert, Linking } from 'react-native'
 import React, {useState} from 'react'
 import {Button, Icon} from 'react-native-elements'
 import { colors } from '../Global/styles'
@@ -9,27 +9,34 @@ import Spinner from 'react-native-loading-spinner-overlay'
 const BookingPage = ({navigation,route}) => {
 
   const {id,rName,raddress} = route.params
+  const url ="https://pmny.in/9rQ6D0XnKU96"
+  // const link = Linking.openURL(url)
   const [loading, setLoading] = useState(false);
-  const [indexCheckDay, setIndexCheckDay] = useState("0")
-  const [indexCheckTime, setIndexCheckTime] = useState("0")
+  const [indexCheckDay, setIndexCheckDay] = useState("")
+  const [indexCheckTime, setIndexCheckTime] = useState("")
+  const [Guestdetails,setGuestdetails] = useState("")
   const [Counter,setCounter] = useState(1);
   const availability = () =>{
-    if(!setIndexCheckDay|!setIndexCheckTime){
-      alert("Error! Select Date and Time")
+    if(!Guestdetails|!setIndexCheckDay|!setIndexCheckTime){
+      alert("Error! Enter Guest Details")
     }
     else{
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       Alert.alert(
-        "",
-        "Available: 50",
+        "Confirm Your Booking",
+        "Make Payment?",
         [
           {
-            text:"okay", 
-            onPress:()=>{
-              
-              navigation.navigate("Guestdetails")}
+            text:"yes", 
+            onPress:()=>Linking.openURL(url)
+            // navigation.navigate("Guestdetails")
+
+          },
+          {
+            text:"no",
+            onPress:()=>[Alert.alert("Booking Failed!"), navigation.goBack("RestaurantsHomeScreen")]
           }
         ]
         )
@@ -149,7 +156,9 @@ const BookingPage = ({navigation,route}) => {
         <Text style={styles.text1}>Step 2: Enter Guest Details</Text>
         <TextInput
         placeholder='Enter Guest Name'
-        style={styles.inputView}/>
+        style={styles.inputView}
+        onChangeText={(Guestdetails)=>setGuestdetails(Guestdetails)}
+        />
         <TextInput
         placeholder='Enter Menu (if any)'
         style={styles.inputView}/>

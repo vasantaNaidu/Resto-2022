@@ -10,7 +10,7 @@ import { Home } from '../Screen/Home'
 const RootClientTabs = createBottomTabNavigator();
 
 
-const ClientTabs=()=>{
+const ClientTabs=({navigation,route})=>{
 
     return(
         <RootClientTabs.Navigator screenOptions={{headerShown: false}}>

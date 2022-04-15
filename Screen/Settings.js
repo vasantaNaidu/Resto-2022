@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import {Icon, Avatar} from 'react-native-elements'
 import { colors } from '../Global/styles'
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const Settings = ({navigation}) => {
@@ -28,6 +28,7 @@ const Settings = ({navigation}) => {
             source = {{uri:"https://bit.ly/3GjVRz1"}}/>
         </View>
 
+          <TouchableOpacity>
         <View style={{flexDirection:'row',justifyContent:'center',marginTop:20}}>
         <Icon 
             name ="camera"
@@ -37,21 +38,21 @@ const Settings = ({navigation}) => {
             />
         <Text>Add Image</Text>
         </View>
-        
+        </TouchableOpacity>
         <View style={{paddingTop:15}}>
           <View style={{marginBottom:15}}>
           <TextInput placeholder="Change Your Name"
-            placeholderTextColor="#003f5c">Change Your Name</TextInput>
+            placeholderTextColor="#003f5c"/>
           </View>
           
           <View style={{marginBottom:15}}>
           <TextInput placeholder="Phone Number"
-            placeholderTextColor="#003f5c">Phone Number</TextInput>
+            placeholderTextColor="#003f5c"/>
           </View>
           
           <View style={{marginBottom:15}}>
           <TextInput placeholder="Email Address"
-            placeholderTextColor="#003f5c">Email</TextInput>
+            placeholderTextColor="#003f5c"/>
           </View>
           
         </View>
