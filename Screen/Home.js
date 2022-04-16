@@ -165,7 +165,7 @@ export const Home = ({navigation}) => {
                            averageReview ={item.averageReview}
                            numberOfReview ={item.numberOfReview}
                            addresslink={item.addresslink}
-                           onpressFoodCard = {()=>{navigation.navigate("RestaurantsHomeScreen",{id:item,rName:item.restaurantName})}}
+                           onpressFoodCard = {()=>{navigation.navigate("RestaurantsHomeScreen",{id:index,restaurant:item.restaurantName})}}
                        />
                 </View>
             )
